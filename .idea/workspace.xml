@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2ae83b2-c6f4-425e-9aba-22a201bd88a6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventura/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ventura/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventura/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ventura/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +116,7 @@
       <workItem from="1662717180498" duration="1942000" />
       <workItem from="1662945152879" duration="9595000" />
       <workItem from="1662972656342" duration="4082000" />
-      <workItem from="1662976754774" duration="708000" />
+      <workItem from="1662976754774" duration="1832000" />
     </task>
     <servers />
   </component>
