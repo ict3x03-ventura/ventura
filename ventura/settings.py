@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'tailwind',
     'web',
     'django_browser_reload',
+    'base',
 ]
 
 MIDDLEWARE = [
@@ -87,8 +88,12 @@ WSGI_APPLICATION = 'ventura.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'ventura',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': os.getenv('MONGO_CONNECTION_STRING'),
+        }
     }
 }
 
