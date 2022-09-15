@@ -86,16 +86,16 @@ WSGI_APPLICATION = 'ventura.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'ventura',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': os.getenv('MONGO_CONNECTION_STRING'),
-        }
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'ventura',
+#         'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': os.getenv('MONGO_CONNECTION_STRING'),
+#         }
+#     }
+# }
 
 
 # Password validation
