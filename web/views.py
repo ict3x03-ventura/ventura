@@ -12,4 +12,5 @@ mongo_connection_string = os.getenv('MONGO_CONNECTION_STRING')
 # Create your views here.
 def index(request):
     template = loader.get_template('base.html')
-    return HttpResponse("<h1>Indian food is the best</h1>")
+    return HttpResponse(template.render({}, request))
+
