@@ -5,6 +5,8 @@
 - `python` ^3.6
 - `pip`
 - `virtualenv` (_just `pip install virtualenv` if don't have_)
+- PostgreSQL 
+- pgAdmin (_optional_)
 
 ## Installation
 
@@ -46,9 +48,15 @@ pip install -r requirements.txt
 pip3 install -r requirements.txt
 ```
 
+### Initialising the Database
+To initialise the database, run the following command:
+```
+python manage.py migrate
+```
+
 ### Running the Program
 
-Once you activated your virtual enviroment, you can run the program. To run the program, run `python ventura/manage.py runserver` in the terminal and navigate to the localhost stated in the terminal
+Once you activated your virtual environment, you can run the program. To run the program, run `python manage.py runserver` in the terminal and navigate to the localhost stated in the terminal
 
 ---
 
