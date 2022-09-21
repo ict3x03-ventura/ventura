@@ -88,15 +88,14 @@ WSGI_APPLICATION = 'ventura.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'djongo',
         'NAME': 'ventura',
-        'USER': 'postgres',
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': os.getenv('MONGO_CONNECTION_STRING'),
+        }
     }
 }
-
 
 
 # Password validation
