@@ -7,16 +7,16 @@
     <div style="padding-top: 5.0rem">
 <!-- This example requires Tailwind CSS v2.0+ -->
 <!-- Hero Section -->
-<section class="bg-white dark:bg-gray-900">
+<section class="bg-gray-900">
     <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div class="mr-auto place-self-center lg:col-span-7">
-            <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Hotel Ventura</h1>
-            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">From Booking a room to Checking out, Ventura always provides the best hotel services. It is the fastest growing hotel in South East Asia.</p>
-            <a href="/register" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center dark:text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+            <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white">Hotel Ventura</h1>
+            <p class="max-w-2xl mb-6 font-light  lg:mb-8 md:text-lg lg:text-xl text-gray-400">From Booking a room to Checking out, Ventura always provides the best hotel services. It is the fastest growing hotel in South East Asia. Do reserve a room with us if you want to receive world class services!</p>
+            <a href="/register" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-900">
                 Get started
                 <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
-            <a href="/booking" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+            <a href="/booking" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center  border  rounded-lg  focus:ring-4  text-white border-gray-700 hover:bg-gray-700 focus:ring-gray-800">
                 Book Now
             </a> 
         </div>
@@ -28,25 +28,97 @@
 <!-- End Hero Section-->
 
 <!-- Booking Datepicker -->
-<section class="bg-white dark:bg-gray-900">
+<section class=" bg-gray-900">
     <p class="ml-8 max-w-2xl mb-6 lg:mb-8 md:text-lg lg:text-3xl text-gray-500 font-bold">Book your Vacation Now!</p>
+
     <div date-rangepicker class="flex items-center justify-center">
         <div class="relative">
           <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
           </div>
-          <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+          <input name="start" type="text" class=" border  sm:text-sm rounded-lg  block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Select date start" value={{date_placeholder}}>
         </div>
         <span class="mx-4 text-gray-500">to</span>
         <div class="relative">
           <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
           </div>
-          <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+          <input name="end" type="text" class=" border  sm:text-sm rounded-lg  block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Select date end" value={{date_placeholder}}>
       </div>
+      <!-- Select list -->
+      <select name="guests" class="mx-5 text-white  hover:bg-gray-800 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center bg-gray-400  focus:ring-blue-800" type="button"> Guests <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" >
+        <option value="1">1 Guest</option>
+        <option value="2">2 Guests</option>
+        <option value="3">3 Guests</option>
+        <option value="4">4 Guests</option>
+        </select>
+        <button class="items-center justify-center px-5 py-3 text-base font-medium text-center  border  rounded-lg  focus:ring-4  text-white border-gray-700 hover:bg-gray-700 focus:ring-gray-800">
+            Book Now
+        </button>
       </div>
 </section>
 <!-- End Booking Datepicker -->
+
+<!-- Testimony-->
+
+<section>
+    <p class="max-w-2xl text-4xl font-serif md:text-5xl xl:text-6xl text-white text-center mt-8 ml-auto mr-auto">Guest Reviews</p>
+    <div class="grid mb-8 rounded-lg border shadow-sm border-gray-700 md:mb-12 md:grid-cols-2 ml-3 mr-3 mt-5">
+    <figure class="flex flex-col justify-center items-center p-8 text-center rounded-t-lg border-b  md:rounded-t-none md:rounded-tl-lg md:border-r bg-gray-800 border-gray-700">
+            <blockquote class="mx-auto mb-4 max-w-2xl lg:mb-8 text-gray-400">
+                <h3 class="text-lg font-semibold text-white">Very easy to Book a place</h3>
+                <p class="my-4 font-light">If you care for your time, I hands down would go with Hotel Ventura."</p>
+            </blockquote>
+            <figcaption class="flex justify-center items-center space-x-3">
+                <img class="w-9 h-9 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/karen-nelson.png" alt="profile picture">
+                <div class="space-y-0.5 font-medium dark:text-white text-left">
+                    <div>Bonnie Green</div>
+                    <div class="text-sm font-light text-gray-500 dark:text-gray-400">Avid Traveller</div>
+                </div>
+            </figcaption>    
+        </figure>
+        <figure class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-tr-lg border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <blockquote class="mx-auto mb-4 max-w-2xl text-gray-500 lg:mb-8 dark:text-gray-400">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Solid 5 Stars!</h3>
+                <p class="my-4 font-light"> The hospitality and services provided by each staff of the hotel were excellent, they attended us well at all times and we were impressed by their courtesy. We enjoyed our stay and convey thanks to all associated with the hotel.</p>
+            </blockquote>
+            <figcaption class="flex justify-center items-center space-x-3">
+                <img class="w-9 h-9 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png" alt="profile picture">
+                <div class="space-y-0.5 font-medium dark:text-white text-left">
+                    <div>Roberta Casas</div>
+                    <div class="text-sm font-light text-gray-500 dark:text-gray-400"></div>
+                </div>
+            </figcaption>    
+        </figure>
+        <figure class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-bl-lg border-b border-gray-200 md:border-b-0 md:border-r dark:bg-gray-800 dark:border-gray-700">
+            <blockquote class="mx-auto mb-4 max-w-2xl text-gray-500 lg:mb-8 dark:text-gray-400">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Mindblowing Service!</h3>
+                <p class="my-4 font-light">The hotel is meticulous in its planning, providing excellent décor, signage and the like. Importantly, they never seemed to tire of the constant emails from an equally meticulous event manager. Always prompt and attentive.</p>
+            </blockquote>
+            <figcaption class="flex justify-center items-center space-x-3">
+                <img class="w-9 h-9 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="profile picture">
+                <div class="space-y-0.5 font-medium dark:text-white text-left">
+                    <div>Jese Leos</div>
+                    <div class="text-sm font-light text-gray-500 dark:text-gray-400"></div>
+                </div>
+            </figcaption>    
+        </figure>
+        <figure class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-b-lg border-gray-200 md:rounded-br-lg dark:bg-gray-800 dark:border-gray-700">
+            <blockquote class="mx-auto mb-4 max-w-2xl text-gray-500 lg:mb-8 dark:text-gray-400">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Awesome Staffs</h3>
+                <p class="my-4 font-light">I left something behind at the hotel and also wanted them to issue another receipt for tax purposes. They immediately worked on it and the receipt was sent in the hour by email. The item was returned within the day. Totally beyond my expectation. You can totally trust this hotel! Whilst staying there everything was so clean and the service was very attentive. Will always be a customer here.</p>
+            </blockquote>
+            <figcaption class="flex justify-center items-center space-x-3">
+                <img class="w-9 h-9 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png" alt="profile picture">
+                <div class="space-y-0.5 font-medium dark:text-white text-left">
+                    <div>Joseph McFall</div>
+                    <div class="text-sm font-light text-gray-500 dark:text-gray-400">CTO at Google</div>
+                </div>
+            </figcaption>    
+        </figure>
+    </div>
+</section>
+
     </div>
 {% endblock %}
 
