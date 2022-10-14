@@ -1,0 +1,24 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Hotel Ventura</title>
+    <link rel="icon" type="image/svg+xml" href="{% static '/image/logo.svg' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
+    {% tailwind_css %}
+	</head>
+	<body class="h-screen bg-white dark:bg-gray-900">
+        {% include 'navbar.html' %}
+
+            {% block content %}
+            {% endblock %}
+        {% include 'footer.html' %}
+	</body>
+</html>
