@@ -1,1 +1,50 @@
 {%extends 'main.html'%}
+{% load static %}
+
+{% block head %}
+<title>Contact Us</title>
+{% endblock %}
+{% block content %}
+    <div style="padding-top: 5.0rem" class="ml-8">
+        <p class="max-w-2xl mb-6 lg:mb-8 md:text-lg lg:text-5xl text-white font-bold">Contact</p>
+        <div class="grid grid-cols-2 gap-4 content-center">
+            <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.66540302967!2d103.84659831475406!3d1.3774333989953969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da16e96db0a1ab%3A0x3d0be54fbbd6e1cd!2sSingapore%20Institute%20of%20Technology%20(SIT%40NYP)!5e0!3m2!1sen!2ssg!4v1666027498487!5m2!1sen!2ssg" 
+              style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full h-96">
+            </iframe>
+            </div>
+            <div class="p-6 max-w-sm rounded-lg border shadow-md bg-gray-800 border-gray-700 my-auto">
+                <p class="max-w-2xl mb-6 lg:mb-8 md:text-lg lg:text-3xl text-white font-bold">Locate Us</p>
+                <text class="max-w-2xl mb-6 lg:mb-8 md:text-lg lg:text-xl text-white font-normal">Phone: (+65) 12345678</text>
+                <br>
+                <text class="max-w-2xl mb-6 lg:mb-8 md:text-lg lg:text-xl text-white font-semibold">Hotel Ventura</text>
+                <br>
+                <text class="max-w-2xl mb-6 lg:mb-8 md:text-lg lg:text-xl text-white font-normal">172 Ang Mo Kio Ave 8, Singapore 567739</text>
+            </div>
+        </div>
+        
+        <section class="bg-gray-900">
+            <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center  text-white">Contact Us</h2>
+                <p class="mb-8 lg:mb-16 font-light text-center  text-gray-400 sm:text-xl">Got a Special Event? Want to send feedback about our service? Need details about our Business plan? Let us know.</p>
+                <form action="#" class="space-y-8">
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Your email</label>
+                        <input type="email" id="email" class="border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light" placeholder="name@ventura.com" required>
+                    </div>
+                    <div>
+                        <label for="subject" class="block mb-2 text-sm font-medium  text-gray-300">Subject</label>
+                        <input type="text" id="subject" class="block p-3 w-full text-sm   rounded-lg border focus:ring-primary-500 focus:border-primary-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light" placeholder="Let us know how we can help you" required>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="message" class="block mb-2 text-sm font-medium  text-gray-400">Your message</label>
+                        <textarea id="message" rows="6" class="block p-2.5 w-full text-sm   rounded-lg shadow-sm border  focus:ring-primary-500 focus:border-primary-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500" placeholder="Leave a comment..."></textarea>
+                    </div>
+                    <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 bg-blue-600 hover:bg-blue-700 focus:ring-primary-800">Send message</button>
+                </form>
+            </div>
+          </section>
+        
+
+    </div>
+{% endblock %}
