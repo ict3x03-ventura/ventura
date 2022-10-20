@@ -4,6 +4,7 @@ from django.template import loader
 from django.shortcuts import render
 from datetime import date
 
+
 # Create your views here.
 def index(request):
     return render(request, 'home.html', {'date_placeholder': date_placeholder()})
@@ -15,6 +16,11 @@ def about(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+def login(request):
+    return render(request, 'login.html')
+
 
 def date_placeholder():
     today = date.today()
