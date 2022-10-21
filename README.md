@@ -5,8 +5,8 @@
 - `python` ^3.6
 - `pip`
 - `virtualenv` (_just `pip install virtualenv` if don't have_)
-- PostgreSQL 
-- pgAdmin (_optional_)
+- `Docker`
+- `NodeJS for npm`
 
 ## Installation
 
@@ -48,15 +48,17 @@ pip install -r requirements.txt
 pip3 install -r requirements.txt
 ```
 
-### Initialising the Database
-To initialise the database, run the following command:
-```
-python manage.py migrate
-```
+### Install Dependencies from npm
+
+To install the required dependencies from npm, you will need to have `NodeJS` installed. Do run `npm install` to install the required dependencies for the project.
+
+### Building the project using Docker
+
+To build the project that is in docker currently, run `docker-compose build` and `docker-compose run --rm app django-admin startproject base .` to build the application.
 
 ### Running the Program
 
-Once you activated your virtual environment, you can run the program. To run the program, run `python manage.py runserver` in the terminal and navigate to the localhost stated in the terminal
+Once you have built finish the docker containers, you may run the docker containers by `docker-compose up` command in the terminal.
 
 ---
 
