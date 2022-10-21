@@ -22,10 +22,6 @@ class HotelRoom(models.Model):
     room_price = models.FloatField()
     room_status = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.room_number
-
-
 class Reservations(models.Model):
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     room = models.ForeignKey(HotelRoom, on_delete=models.CASCADE)
@@ -52,5 +48,3 @@ class HotelRoomImages(models.Model):
     room = models.ForeignKey(HotelRoom, on_delete=models.CASCADE)
     image_path = models.CharField(max_length=250, default=None, blank=True, null=True)
 
-    def __str__(self):
-        return self.room.room_number

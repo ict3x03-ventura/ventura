@@ -130,3 +130,6 @@ dmypy.json
 .idea/
 .idea/*
 node_modules/
+
+# Seed data files
+seed/*
