@@ -1,0 +1,43 @@
+version: "3.6"
+services:
+  db:
+    image: postgres:15-bullseye
+    restart: always
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+    ports:
+      - "5432:5432"
+    container_name: postgres-venture
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    volumes:
+      - ./pgadmin_data:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
+    ports:
+      - "5050:80"
+    container_name: pgadmin-venture
+    
+
+  app:
+    platform: linux/amd64
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    image: app:app 
+    container_name: ventura_container
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+
+
+
