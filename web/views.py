@@ -21,6 +21,9 @@ def contact(request):
 def login(request):
     return render(request, 'login.html')
 
+def register(request):
+    return render(request, 'register.html')
+
 
 def date_placeholder():
     today = date.today()
