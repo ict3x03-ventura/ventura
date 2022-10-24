@@ -24,6 +24,8 @@ def login(request):
 def register(request):
     return render(request, 'register.html')
 
+def payment(request):
+    return render(request, 'payment.html')
 
 def date_placeholder():
     today = date.today()
