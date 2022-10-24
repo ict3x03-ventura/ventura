@@ -21,6 +21,9 @@ class HotelRoom(models.Model):
     room_type = models.CharField(max_length=50)
     room_price = models.FloatField()
     room_status = models.BooleanField(default=False)
+    room_quantity = models.IntegerField(default=7)
+    room_description = models.TextField(default="No description")
+
 
 class Reservations(models.Model):
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
