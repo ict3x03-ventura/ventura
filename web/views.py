@@ -27,6 +27,9 @@ def register(request):
 def payment(request):
     return render(request, 'payment.html')
 
+def account(request):
+    return render(request, 'account.html')
+
 def date_placeholder():
     today = date.today()
     today = today.strftime("%m/%d/%Y")
