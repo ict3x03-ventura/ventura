@@ -14,4 +14,8 @@ urlpatterns = [
     path('', views.index, name='webindex'),
     path('about', views.about, name='webabout'),
     path('contact', views.contact, name='webcontact'),
+    path('login', views.login, name='weblogin'),
+    path('register', views.register, name='webregister'),
+    path('payment', views.payment, name='webpayment'),
+    path('account', views.account, name='webaccount'),
 ]

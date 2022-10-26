@@ -1,0 +1,176 @@
+{%extends 'main.html'%}
+{% load static %}
+
+{% block head %}
+<title>Payment page</title>
+{% endblock %}
+{% block content %}
+<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css')</style>
+    <div style="padding-top: 5.0rem" class="ml-8">
+        <p class="max-w-2xl mb-6 lg:mb-8 md:text-lg lg:text-5xl text-white font-bold"></p>
+    </div>
+
+        <section class="bg-gray-900">
+{#            <div class="py-8 lg:py-16 px-0 mx-auto max-w-screen-md"> uncomment to adjust the width#}
+
+<div class="min-w-screen min-h-screen bg-gray-800 py-5">
+    <div class="px-5">
+        <div class="mb-2">
+            <a href="#" class="focus:outline-none hover:underline text-white text-sm">Fill in the fields and check thoroughly before proceeding.</a>
+        </div>
+
+    <div class="w-full bg-gray-800 border-t border-b border-gray-200 px-5 py-10 text-gray-800">
+        <div class="w-full">
+            <div class="-mx-3 md:flex items-start">
+                <div class="px-3 md:w-7/12 lg:pr-10">
+                    <div class="w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 pb-6">
+                        <div class="w-full flex items-center">
+                            <div class="overflow-hidden w-40 h-30">
+{#                            <div class="overflow-hidden rounded-lg w-40 h-30 bg-gray-40 border border-gray-200">#}
+                                <img src="{%static 'image/deluxeroom2.jpg'%}" alt="roomtype">
+                            </div>
+                            <div class="flex-grow pl-3">
+                                <h6 class="font-semibold uppercase text-white">Deluxe Room</h6>
+                                <p class="text-gray-400">x 1</p>
+                            </div>
+                            <div>
+                                <span class="font-semibold text-white text-xl">$210.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <div class="-mx-2 flex items-end justify-end">
+                            <div class="flex-grow px-2">
+                                <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Room descriptions etc.....</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-6 pb-6 border-b border-gray-200 text-white">
+                        <div class="w-full flex mb-3 items-center">
+                            <div class="flex-grow">
+                                <span class="text-white">Subtotal</span>
+                            </div>
+                            <div class="pl-3">
+                                <span class="font-semibold">$210.00</span>
+                            </div>
+                        </div>
+                        <div class="w-full flex items-center">
+                            <div class="flex-grow">
+                                <span class="text-white">Taxes (GST)</span>
+                            </div>
+                            <div class="pl-3">
+                                <span class="font-semibold">$14.70</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-6 pb-6 border-b border-gray-200 md:border-none text-white text-xl">
+                        <div class="w-full flex items-center">
+                            <div class="flex-grow">
+                                <span class="text-white">Total</span>
+                            </div>
+                            <div class="pl-3">
+                                <span class="font-semibold text-white text-sm">SGD</span> <span class="font-semibold">$210.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3 md:w-5/12">
+                    <div class="w-full mx-auto rounded-lg bg-gray-800 border border-gray-200 p-3 text-gray-400 font-light mb-6">
+                        <div class="w-full flex mb-3 items-center">
+                            <div class="w-32">
+                                <span class="text-white font-semibold">Payment</span>
+                            </div>
+                            <div class="flex-grow pl-3">
+                                <span>Nur Fadhilah</span>
+                            </div>
+                        </div>
+                        <div class="w-full flex items-center">
+                            <div class="w-32">
+                                <span class="text-white font-semibold">Billing Address</span>
+                            </div>
+                            <div class="flex-grow pl-3">
+                                <span>123 Nanyang Poly, SIT, Singapore</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full mx-auto rounded-lg bg-gray-800 border border-gray-200 text-gray-800 font-light mb-6">
+                        <div class="w-full p-3 border-b border-gray-200">
+                            <div class="mb-5">
+                                <label for="type1" class="flex items-center cursor-pointer">
+                                    <img src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png" class="h-6 ml-3">
+                                </label>
+                            </div>
+                            <div>
+                                <div class="mb-3">
+                                    <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Name on card</label>
+                                    <div>
+                                        <input class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Nur Fadhilah" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Card number</label>
+                                    <div>
+                                        <input class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="0000 0000 0000 0000 " type="text"/>
+                                    </div>
+                                </div>
+                                <div class="mb-3 -mx-2 flex items-end">
+                                    <div class="px-2 w-1/4">
+                                        <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Expiration date</label>
+                                        <div>
+                                            <select class="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                                                <option value="01">01 - January</option>
+                                                <option value="02">02 - February</option>
+                                                <option value="03">03 - March</option>
+                                                <option value="04">04 - April</option>
+                                                <option value="05">05 - May</option>
+                                                <option value="06">06 - June</option>
+                                                <option value="07">07 - July</option>
+                                                <option value="08">08 - August</option>
+                                                <option value="09">09 - September</option>
+                                                <option value="10">10 - October</option>
+                                                <option value="11">11 - November</option>
+                                                <option value="12">12 - December</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="px-2 w-1/4">
+                                        <select class="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                        </select>
+                                    </div>
+                                    <div class="px-2 w-1/4">
+                                        <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Security code</label>
+                                        <div>
+                                            <input class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="000" type="text"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <button type="submit" class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full" data-mdb-ripple="true" data-mdb-ripple-color="light">
+                            Pay Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+            </div>
+          </section>
+
+
+    </div>
+{% endblock %}
