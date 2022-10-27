@@ -18,4 +18,5 @@ urlpatterns = [
     path('register', views.register, name='webregister'),
     path('payment', views.payment, name='webpayment'),
     path('account', views.account, name='webaccount'),
+    path('room', views.room, name='webroom'),
 ]

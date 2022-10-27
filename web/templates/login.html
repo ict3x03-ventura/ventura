@@ -1,8 +1,13 @@
+{%extends 'main.html'%}
 {% load static tailwind_tags %}
 {% load static %}
 
+{% block head %}
 <script src="https://cdn.tailwindcss.com"></script>
+{% endblock %}
 
+{% block content %}
+<div style="padding-top: 5.0rem" class="ml-8">
 <section class="h-full gradient-form bg-gray-900 md:h-screen">
   <div class="container py-12 px-6 h-full">
     <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
@@ -81,3 +86,8 @@
     </div>
   </div>
 </section>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
