@@ -7,16 +7,16 @@ from datetime import date
 
 # Create your views here.
 def index(request):
-    return render(request, 'home.html', {'date_placeholder': date_placeholder()})
+    today = date.today()
+    today = today.strftime("%m/%d/%Y")
+    return render(request, 'home.html', {'date_placeholder': today})
 
 
 def about(request):
     return render(request, 'about.html')
 
-
 def contact(request):
     return render(request, 'contact.html')
-
 
 def login(request):
     return render(request, 'login.html')
@@ -30,7 +30,6 @@ def payment(request):
 def account(request):
     return render(request, 'account.html')
 
-def date_placeholder():
-    today = date.today()
-    today = today.strftime("%m/%d/%Y")
-    return today
+def room(request):
+    return render(request, 'room.html')
+
