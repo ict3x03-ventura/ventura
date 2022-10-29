@@ -11,11 +11,11 @@
         <div class="grid grid-cols-3 gap-0 items-center">
         {% for room in room_list %}
         <div class="max-w-sm rounded-lg border border-gray-200 shadow-md bg-gray-800 border-gray-700">
-            <a href="#">
+            <a href="payment/{{room.room_id}}">
                 <img class="rounded-t-lg" src="../static/{{room.image_path}}" alt="{{room.image_path}}" />
             </a>
             <div class="p-5">
-                <a href="#">
+                <a href="payment/{{room.room_id}}"
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">{{room.room.room_type}} Size</h5>
                 </a>
                 <p class="mb-3 font-normal text-gray-400">{{room.room.room_description}}</p>
