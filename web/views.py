@@ -3,7 +3,7 @@ from django.http import HttpResponse, request
 from django.template import loader
 from django.shortcuts import render
 from datetime import date
-
+from base.models import HotelRoom, HotelRoomImages
 
 # Create your views here.
 def index(request):
@@ -31,5 +31,9 @@ def account(request):
     return render(request, 'account.html')
 
 def room(request):
-    return render(request, 'room.html')
+    room_list = HotelRoomImages.objects.all().select_related('room')
+    image_list = []
+    for roomid in range (room_list.count()):
+        image_list.append(room_list[roomid].image_path)
+    return render(request, 'room.html', {'room_list': room_list, 'image_list': image_list})
 
