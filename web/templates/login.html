@@ -24,13 +24,19 @@
                   />
 {#                  <h4 class="text-xl font-semibold mt-1 mb-12 pb-1">Add in slogan</h4>#}
                 </div>
-                <form>
+                <form method="POST" action="">
+                  {% csrf_token %}
+                  {% if messages %}
+                  {% for message in messages %}
+                  <li class="red-800">{{ message }}</li>
+                  {% endfor %}
+                  {% endif %}
                   <p class="mb-4">Please login to your account:</p>
                   <div class="mb-4">
                     <input
-                      type="text"
+                      type="username"
                       class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      id="exampleFormControlInput1"
+                      name="username"
                       placeholder="Username"
                     />
                   </div>
@@ -38,7 +44,7 @@
                     <input
                       type="password"
                       class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      id="exampleFormControlInput1"
+                      name="password"
                       placeholder="Password"
                     />
 

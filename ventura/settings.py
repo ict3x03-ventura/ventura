@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': 'ventura',
         'USER': 'postgres',
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': 'postgres-venture',
+        'HOST': '172.22.0.3',
         'PORT': '5432',
     },
 }
