@@ -19,4 +19,6 @@ urlpatterns = [
     path('payment', views.payment, name='webpayment'),
     path('account', views.account, name='webaccount'),
     path('room', views.room, name='webroom'),
+    path('booking', views.booking, name='paybooking'),
+    path('logout', views.logoutUser, name='weblogout'),
 ]

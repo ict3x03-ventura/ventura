@@ -54,3 +54,9 @@ def room(request):
     room_list = HotelRoomImages.objects.all().select_related('room')
     return render(request, 'room.html', {'room_list': room_list})
 
+def logoutUser(request):
+    logout(request)
+    return redirect('webindex')
+
+def booking(request):
+    return render(request, 'booking.html')
