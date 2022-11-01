@@ -60,3 +60,6 @@ def logoutUser(request):
 
 def booking(request):
     return render(request, 'booking.html')
+
+def settings(request):
+    return render(request, 'mfasettings.html')

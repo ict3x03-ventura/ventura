@@ -8,25 +8,43 @@
   <div class="flex md:order-2">
     
       <button id="dropdownDefault" data-dropdown-toggle="dropdown" type="button" class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
-      {% if not user.is_authenticated %} Get Started {% else %} User Actions {% endif %} </button>
-        <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-          <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+      {% if not user.is_authenticated %} Get Started {% else %} User Actions {% endif %} 
+      <img src="{% static '/image/dropdown.svg' %}" class="inline-block ml-1 h-4 w-4" alt="chevron-down">
+      </button>
+        <div id="dropdown" class="hidden z-10 w-44 rounded divide-y divide-gray-100 shadow bg-gray-700">
+          <ul class="py-1 text-sm text-gray-200" aria-labelledby="dropdownDefault">
             {% if not user.is_authenticated %}
             <li>
-              <a href="{%url 'weblogin'%}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Login</a>
+              <a href="{%url 'weblogin'%}" class="block py-2 px-4 hover:bg-gray-600 hover:text-white">
+                <img src="{% static '/image/login.svg' %}" class="inline-block h-5 w-5 mr-2" alt="Login">
+                Sign In
+              </a>
             </li>
             <li>
-              <a href="{%url 'webregister'%}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Register</a>
+              <a href="{%url 'webregister'%}" class="block py-2 px-4 hover:bg-gray-600 hover:text-white">
+              <img src="{% static '/image/register.svg' %}" class="inline-block h-5 w-5 mr-2" alt="Register">
+                Register
+              </a>
             </li>
             {% else %}
             <li>
-              <a href="{%url 'paybooking'%}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bookings</a>
+              <a href="{%url 'paybooking'%}" class="block py-2 px-4 hover:bg-gray-600 hover:text-white">
+                <img src="{% static '/image/booking.svg' %}" class="inline-block h-5 w-5 mr-2" alt="booking">
+                Bookings</a>
             </li>
-            <li> 
-              <a href="{%url 'weblogout'%}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
+            <li>
+              <a href="{%url 'usersetting'%}" class="block py-2 px-4 hover:bg-gray-600 hover:text-white">
+                <img src="{% static '/image/settings.svg' %}" class="inline-block h-5 w-5 mr-2" alt="setting">
+                Settings</a>
             </li>
-            {% endif %}
           </ul>
+            <div class="py-1 text-sm text-gray-200"> 
+              <a href="{%url 'weblogout'%}" class="block py-2 px-4 hover:bg-gray-600 hover:text-white">
+                <img src="{% static '/image/logout.svg' %}" class="inline-block h-5 w-5 mr-2" alt="logout">
+                Sign Out</a>
+            </div>
+            {% endif %}
+          
       </div>
 
       <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">

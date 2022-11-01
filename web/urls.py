@@ -21,4 +21,5 @@ urlpatterns = [
     path('room', views.room, name='webroom'),
     path('booking', views.booking, name='paybooking'),
     path('logout', views.logoutUser, name='weblogout'),
+    path('settings', views.settings, name='usersetting'),
 ]
