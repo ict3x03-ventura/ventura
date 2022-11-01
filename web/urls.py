@@ -14,4 +14,12 @@ urlpatterns = [
     path('', views.index, name='webindex'),
     path('about', views.about, name='webabout'),
     path('contact', views.contact, name='webcontact'),
+    path('login', views.loginPage, name='weblogin'),
+    path('register', views.register, name='webregister'),
+    path('payment', views.payment, name='webpayment'),
+    path('account', views.account, name='webaccount'),
+    path('room', views.room, name='webroom'),
+    path('booking', views.booking, name='paybooking'),
+    path('logout', views.logoutUser, name='weblogout'),
+    path('settings', views.settings, name='usersetting'),
 ]
