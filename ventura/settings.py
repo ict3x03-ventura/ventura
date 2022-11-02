@@ -149,3 +149,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+RECAPTCHA_PUBLIC_KEY = os.getenv('CAPTCHA_SITE_KEY')
+RECAPTCHA_PRIVATE_KEY = os.getenv('CAPTCHA_SECRET_KEY')
