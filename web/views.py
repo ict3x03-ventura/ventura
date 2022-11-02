@@ -7,6 +7,7 @@ from datetime import date
 from base.models import HotelRoom, HotelRoomImages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -41,25 +42,27 @@ def loginPage(request):
 
     return render(request, 'login.html', context)
 
-def register(request):
+def registerPage(request):
     return render(request, 'register.html')
-
-def payment(request):
-    return render(request, 'payment.html')
 
 def account(request):
     return render(request, 'account.html')
 
 def room(request):
     room_list = HotelRoomImages.objects.all().select_related('room')
-    return render(request, 'room.html', {'room_list': room_list})
+    context = {'room_list': room_list}
+    return render(request, 'room.html', context)
 
 def logoutUser(request):
     logout(request)
     return redirect('webindex')
 
-def booking(request):
-    return render(request, 'booking.html')
+@login_required(login_url='weblogin')
+def booking(request, room_id):
+    
+    gst_calc = 0.07 
+    context = {}
+    return render(request, 'payment.html', context)
 
 def settings(request):
     return render(request, 'mfasettings.html')

@@ -23,7 +23,8 @@
 {#                  />#}
 {#                  <h4 class="text-xl font-semibold mt-1 mb-12 pb-1">Add in slogan</h4>#}
 {#                </div>#}
-                <form>
+                <form method="POST" action="">
+                  {% csrf_token %}
                   <p class="mb-4">Fill in the fields below:</p>
                   <div class="mb-4">
                     <input
@@ -31,6 +32,7 @@
                       class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       id="exampleFormControlInput1"
                       placeholder="Username"
+                      name="username"
                     />
                   </div>
                   <div class="mb-4">
@@ -39,6 +41,7 @@
                       class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       id="exampleFormControlInput1"
                       placeholder="Password"
+                      name="password"
                     />
                   </div>
                     <div class="mb-4">
@@ -47,6 +50,7 @@
                       class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       id="exampleFormControlInput1"
                       placeholder="Email"
+                      name="email"
                     />
                   </div>
                     <div class="mb-4">
@@ -55,6 +59,7 @@
                       class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       id="exampleFormControlInput1"
                       placeholder="First Name"
+                      name="first_name"
                     />
                   </div>
                     <div class="mb-4">
@@ -63,6 +68,7 @@
                       class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       id="exampleFormControlInput1"
                       placeholder="Last Name"
+                      name="last_name"
                     />
                   </div>
                     <div class="mb-4">
