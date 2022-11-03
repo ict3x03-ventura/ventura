@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'web',
     'django_browser_reload',
     'base',
-    'rest_framework'
+    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
+
 
 ROOT_URLCONF = 'ventura.urls'
 
@@ -149,3 +151,13 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+# Recaptcha Secret Keys 
+RECAPTCHA_PUBLIC_KEY = os.getenv('CAPTCHA_SITE_KEY')
+RECAPTCHA_PRIVATE_KEY = os.getenv('CAPTCHA_SECRET_KEY')
+
+# SESSION CONFIGURATION
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_HTTP_ONLY = True
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_AGE = 60*60 # 1 hour

@@ -8,6 +8,9 @@ from base.models import HotelRoom, HotelRoomImages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from ventura.settings import RECAPTCHA_PUBLIC_KEY as secret_key
+from .decorators import check_recaptcha
+from .forms import Captcha
 
 # Create your views here.
 def index(request):
@@ -22,24 +25,26 @@ def about(request):
 def contact(request):
     return render(request, 'contact.html')
 
+@check_recaptcha
 def loginPage(request):
-    context = {}
+    context = {'secret_key': secret_key}
     if request.method == 'POST':
+        
         username = request.POST.get('username')
         password = request.POST.get('password')
         try:
             user = User.objects.get(username=username)
         except:
-            messages.error(request, 'User does not exist')
+            print("Username or password does not exist")
+        
 
         user = authenticate(request, username=username, password=password)
-        if user is not None:
+        if user is not None and request.recaptcha_is_valid:
             login(request, user)
             return redirect('webindex')
         else:
             messages.error(request, 'Username OR password is incorrect')
-            
-
+            print("Username or password does not exist")
     return render(request, 'login.html', context)
 
 def registerPage(request):

@@ -1,6 +1,7 @@
 version: "3.6"
 services:
   db:
+  
     image: postgres:15-bullseye
     restart: always
     volumes:
