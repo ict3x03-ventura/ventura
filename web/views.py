@@ -29,7 +29,7 @@ def contact(request):
 def loginPage(request):
     context = {'secret_key': secret_key}
     if request.method == 'POST':
-        form = Captcha(request.POST)
+        
         username = request.POST.get('username')
         password = request.POST.get('password')
         try:

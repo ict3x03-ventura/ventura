@@ -28,7 +28,9 @@
                   {% csrf_token %}
                   {% if messages %}
                   {% for message in messages %}
+                  {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
                   <li class="red-800">{{ message }}</li>
+                  {% endif %}
                   {% endfor %}
                   {% endif %}
                   <p class="mb-4">Please login to your account:</p>
