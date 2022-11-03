@@ -48,6 +48,9 @@ def registerPage(request):
 def account(request):
     return render(request, 'account.html')
 
+def paymentconfirmation(request):
+    return render(request, 'paymentconfirmation.html')
+
 def room(request):
     room_list = HotelRoomImages.objects.all().select_related('room')
     context = {'room_list': room_list}

@@ -20,6 +20,7 @@ urlpatterns = [
     path('account', views.account, name='webaccount'),
     path('room', views.room, name='webroom'),
     path('booking', views.booking, name='paybooking'),
+    path('paymentconfirmation', views.paymentconfirmation, name='paymentconfirmation'),
     path('logout', views.logoutUser, name='weblogout'),
     path('settings', views.settings, name='usersetting'),
 ]
