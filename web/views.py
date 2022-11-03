@@ -53,6 +53,12 @@ def room(request):
     context = {'room_list': room_list}
     return render(request, 'room.html', context)
 
+def payment(request,room_id):
+    room_list = HotelRoomImages.objects.all().select_related('room')
+    context = {'room_list': room_list[room_id - 1]}
+    return render(request, 'payment.html', context)
+
+
 def logoutUser(request):
     logout(request)
     return redirect('webindex')

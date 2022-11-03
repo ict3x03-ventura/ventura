@@ -30,18 +30,18 @@
                                 <img src="{%static 'image/deluxeroom2.jpg'%}" alt="roomtype">
                             </div>
                             <div class="flex-grow pl-3">
-                                <h6 class="font-semibold uppercase text-white">Deluxe Room</h6>
+                                <h6 class="font-semibold uppercase text-white">{{room_list.room.room_type}}</h6>
                                 <p class="text-gray-400">x 1</p>
                             </div>
                             <div>
-                                <span class="font-semibold text-white text-xl">$210.00</span>
+                                <span class="font-semibold text-white text-xl">${{room_list.room.room_price}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="mb-6 pb-6 border-b border-gray-200">
                         <div class="-mx-2 flex items-end justify-end">
                             <div class="flex-grow px-2">
-                                <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Room descriptions etc.....</label>
+                                <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">{{room_list.room.room_description}}</label>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <span class="text-white">Subtotal</span>
                             </div>
                             <div class="pl-3">
-                                <span class="font-semibold">$210.00</span>
+                                <span class="font-semibold">${{room_list.room.room_price}}</span>
                             </div>
                         </div>
                         <div class="w-full flex items-center">
@@ -59,7 +59,7 @@
                                 <span class="text-white">Taxes (GST)</span>
                             </div>
                             <div class="pl-3">
-                                <span class="font-semibold">$14.70</span>
+                                <span class="font-semibold">incl</span>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                 <span class="text-white">Total</span>
                             </div>
                             <div class="pl-3">
-                                <span class="font-semibold text-white text-sm">SGD</span> <span class="font-semibold">$210.00</span>
+                                <span class="font-semibold text-white text-sm">SGD</span> <span class="font-semibold">${{room_list.room.room_price}}</span>
                             </div>
                         </div>
                     </div>
