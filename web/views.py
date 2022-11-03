@@ -68,6 +68,3 @@ def booking(request, room_id):
     gst_calc = 0.07 
     context = {}
     return render(request, 'payment.html', context)
-
-def settings(request):
-    return render(request, 'mfasettings.html')
