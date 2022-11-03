@@ -51,7 +51,7 @@
                                 <span class="text-white">Subtotal</span>
                             </div>
                             <div class="pl-3">
-                                <span class="font-semibold">${{room_list.room.room_price}}</span>
+                                <span class="font-semibold">${{room_list.room.room_price|floatformat:2}}</span>
                             </div>
                         </div>
                         <div class="w-full flex items-center">
@@ -69,7 +69,7 @@
                                 <span class="text-white">Total</span>
                             </div>
                             <div class="pl-3">
-                                <span class="font-semibold text-white text-sm">SGD</span> <span class="font-semibold">${{room_list.room.room_price}}</span>
+                                <span class="font-semibold text-white text-sm">SGD</span> <span class="font-semibold">${{room_list.room.room_price|floatformat:2}}</span>
                             </div>
                         </div>
                     </div>
@@ -158,6 +158,11 @@
                     <div>
                         <button type="submit" class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full" data-mdb-ripple="true" data-mdb-ripple-color="light">
                             Pay Now
+                        </button>
+                    </div>
+                    <div>
+                        <button type="submit" class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full" data-mdb-ripple="true" data-mdb-ripple-color="light">
+                            <a href="{{room_list.room.stripe_link}}" target="_blank">Checkout with Stripe</a>.
                         </button>
                     </div>
                 </div>
