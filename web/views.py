@@ -4,7 +4,7 @@ from django.http import HttpResponse, request
 from django.template import loader
 from django.shortcuts import render
 from datetime import date
-from base.models import HotelRoom, HotelRoomImages
+from base.models import HotelRoom, HotelRoomImages, Users
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -53,6 +53,7 @@ def room(request):
     context = {'room_list': room_list}
     return render(request, 'room.html', context)
 
+@login_required(login_url='weblogin')
 def payment(request,room_id):
     room_list = HotelRoomImages.objects.all().select_related('room')
     context = {'room_list': room_list[room_id - 1]}
