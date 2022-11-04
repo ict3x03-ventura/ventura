@@ -28,17 +28,38 @@
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center  text-white">Contact Us</h2>
                 <p class="mb-8 lg:mb-16 font-light text-center  text-gray-400 sm:text-xl">Got a Special Event? Want to send feedback about our service? Need details about our Business plan? Let us know.</p>
                 <form method="POST" action="#" class="space-y-8">
+                    {% csrf_token %}
+                    {% if messages %}
+                  {% for message in messages %}
+                  {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                  <li class="text-red-800">{{ message }}</li>
+                  {% else %}
+                  <li class="text-green-800">{{ message }}</li>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
+
+                  {% for field in u_form %}
+                  <div class="fieldWrapper text-red-800">
+                      {{ field.errors }}
+                      {% if field.help_text %}
+                      <p class="help">{{ field.help_text|safe }}</p>
+                      {% endif %}
+                  </div>
+              {% endfor %}
+
+                  
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Your email</label>
-                        <input type="email" id="email" class="border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light" placeholder="name@ventura.com" required>
+                        {{ form.email }}
                     </div>
                     <div>
                         <label for="subject" class="block mb-2 text-sm font-medium  text-gray-300">Subject</label>
-                        <input type="text" id="subject" class="block p-3 w-full text-sm   rounded-lg border focus:ring-primary-500 focus:border-primary-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light" placeholder="Let us know how we can help you" required>
+                        {{form.subject}}
                     </div>
                     <div class="sm:col-span-2">
                         <label for="message" class="block mb-2 text-sm font-medium  text-gray-400">Your message</label>
-                        <textarea id="message" rows="6" class="block p-2.5 w-full text-sm   rounded-lg shadow-sm border  focus:ring-primary-500 focus:border-primary-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500" placeholder="Leave a comment..."></textarea>
+                        {{form.message}}
                     </div>
                     <script src='https://www.google.com/recaptcha/api.js'></script>
                   <div class="g-recaptcha" data-sitekey="{{secret_key}}"></div>

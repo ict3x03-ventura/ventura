@@ -10,8 +10,11 @@ class Users(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    is_active = models.BooleanField(default=True)
+    verified = models.BooleanField(default=False)
+    two_step_active = models.BooleanField(default=True)
     def __str__(self):
-        return self.username
+        return f'{self.user}'
 
 
 class HotelRoom(models.Model):
@@ -30,7 +33,7 @@ class Reservations(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user} - {self.room}'
 
 
 class Payments(models.Model):
@@ -41,7 +44,7 @@ class Payments(models.Model):
     payment_status = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user} - {self.reservation} - {self.payment_amount}'
 
 
 class HotelRoomImages(models.Model):
@@ -54,5 +57,19 @@ class Feedback(models.Model):
     message = models.TextField(default=None, blank=True, null=True)
 
     def __str__(self):
-        return self.user.username
+        return f'{self.email} - {self.subject}'
 
+class UserToken(models.Model):
+    updated_at = models.DateTimeField(auto_now=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.CharField(max_length=250, default=None, blank=True, null=True)
+    two_step_code = models.CharField(max_length=6, default=None, blank=True, null=True)
+
+    is_email= models.BooleanField(default=False)
+    is_password = models.BooleanField(default=False)
+    is_sms = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.user}'

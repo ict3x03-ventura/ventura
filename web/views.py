@@ -33,10 +33,9 @@ def contact(request):
     alert = False
     if request.method == 'POST':
         form = ContactForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and request.recaptcha_is_valid:
+            messages.success(request, 'Your message has been sent!')
             form.save()
-            alert = True
-
         
     context = {'form': form, 'secret_key': secret_key, 'alert': alert}
     return render(request, 'contact.html', context)

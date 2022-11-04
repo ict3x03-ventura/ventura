@@ -58,19 +58,19 @@ class UserProfileForm(forms.ModelForm):
         return phone_number
 
 class ContactForm(forms.ModelForm):
-    name = forms.CharField(max_length=50, required=True,
+    subject = forms.CharField(max_length=50, required=True,
                             
-                                      widget=forms.TextInput(attrs={'class': 'form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none',
-                                                                'placeholder': 'Name'}))
+                                      widget=forms.TextInput(attrs={'class': 'form-control border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light',
+                                                                'placeholder': 'Subject'}))
     email = forms.EmailField(max_length=50, required=True,
-                                      widget=forms.TextInput(attrs={'class': 'form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none',
+                                      widget=forms.TextInput(attrs={'class': 'form-control border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light',
                                                                 'placeholder': 'Email'}))
     message = forms.CharField(max_length=500, required=True,
-                                      widget=forms.Textarea(attrs={'class': 'form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none',
-                                                                'placeholder': 'Message'}))
+                                      widget=forms.Textarea(attrs={'class': 'form-control block p-2.5 w-full text-sm   rounded-lg shadow-sm border  focus:ring-primary-500 focus:border-primary-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500',
+                                                                'placeholder': 'Leave a message'}))
     class Meta:
         model = Feedback
-        fields = ('name', 'email', 'message')
+        fields = ('subject', 'email', 'message')
     
     def clean_subject(self):
         name = self.cleaned_data['subject']
