@@ -13,7 +13,10 @@ from .decorators import check_recaptcha
 from .forms import UserForm, UserProfileForm, ContactForm
 from django.conf import settings
 from dotenv import load_dotenv
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
 from .mixins import FormErrors, RedirectParams, TokenGenerator, CreateEmail, ActivateTwoStep
+import json
 
 
 load_dotenv()
@@ -106,15 +109,27 @@ def registerPage(request):
             # Mark User profile as inactive until verified
             user.is_active = False
             user.email = user.username
-            user.save() 
+            user.save()
+
+            # create new token
+            token = TokenGenerator()
+            make_token = token.make_token(user)
+            url_safe = urlsafe_base64_encode(force_bytes(user.pk)) 
+
+            # create and send sms code
+            sms_code = ActivateTwoStep(user=user, token=make_token)
 
             # results
             results = "success"
             message = "We sent you an SMS!"
-            context = {'results': results, 'message': message}
-            return redirect('weblogin')
+            context = {'results': results, 'message': message, 'url_safe': url_safe, 'make_token': make_token}
         else:
+            message = FormErrors(u_form, p_form)
             context = {'results': results, 'message': message}
+        return HttpResponse(
+            json.dumps(context),
+            content_type="application/json"
+        )
     
     context = {'u_form': u_form, 'p_form': p_form}
 
@@ -138,6 +153,7 @@ Logout views of Ventura
 def logoutUser(request):
     logout(request)
     return redirect('webindex')
+
 
 '''
 Payment views of Ventura

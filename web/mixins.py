@@ -137,7 +137,7 @@ class CreateSMS:
 		self.message = kwargs.get("message")
 
 		#get API variables
-		sid = settings.TWILIO_ACC_SID
+		sid = settings.TWILIO_ACCOUNT_SID
 		token = settings.TWILIO_AUTH_TOKEN
 		twilio_number = settings.TWILIO_NUMBER
 		
@@ -177,7 +177,7 @@ class ActivateTwoStep:
 
 		#user phonenumbers libaries to convert telephone number into a useable format for Twilio
 		
-		number_object = phonenumbers.parse(self.user.users.phone_number, '65')
+		number_object = phonenumbers.parse(f'+65{self.user.users.phone_number}')
 		telephone = f'+{number_object.country_code}{number_object.national_number}'
 
 		send_sms = CreateSMS(
