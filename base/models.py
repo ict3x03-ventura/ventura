@@ -48,3 +48,11 @@ class HotelRoomImages(models.Model):
     room = models.ForeignKey(HotelRoom, on_delete=models.CASCADE)
     image_path = models.CharField(max_length=250, default=None, blank=True, null=True)
 
+class Feedback(models.Model):
+    email = models.CharField(max_length=150, default=None, blank=True, null=True)
+    subject = models.TextField(default=None, blank=True, null=True)
+    message = models.TextField(default=None, blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
+

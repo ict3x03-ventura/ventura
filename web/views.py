@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from ventura.settings import RECAPTCHA_PUBLIC_KEY as secret_key
 from .decorators import check_recaptcha
-from .forms import UserForm, UserProfileForm
+from .forms import UserForm, UserProfileForm, ContactForm
 from django.conf import settings
 from dotenv import load_dotenv
 
@@ -27,8 +27,19 @@ def index(request):
 def about(request):
     return render(request, 'about.html')
 
+@check_recaptcha
 def contact(request):
-    return render(request, 'contact.html')
+    form = ContactForm()
+    alert = False
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            alert = True
+
+        
+    context = {'form': form, 'secret_key': secret_key, 'alert': alert}
+    return render(request, 'contact.html', context)
 
 @check_recaptcha
 def loginPage(request):
@@ -54,7 +65,7 @@ def loginPage(request):
 
 def registerPage(request):
     if request.user.is_authenticated:
-        return redirect(reverse('webindex'))
+        return redirect('webindex')
     
     u_form = UserForm()
     p_form = UserProfileForm()
