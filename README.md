@@ -1,6 +1,6 @@
 # Ventura
 
-## Requirements'
+## Requirements
 
 - `python` ^3.6
 - `pip`
@@ -8,7 +8,7 @@
 - `Docker`
 - `NodeJS for npm`
 
-## Installation
+## Installation'
 
 Instructions for how to download/install the code onto your machine.
 
