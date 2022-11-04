@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'web',
     'django_browser_reload',
     'base',
+    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
@@ -60,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
+
 
 ROOT_URLCONF = 'ventura.urls'
 
@@ -92,7 +95,7 @@ DATABASES = {
         'NAME': 'ventura',
         'USER': 'postgres',
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': 'postgres-venture',
+        'HOST': '172.22.0.3',
         'PORT': '5432',
     },
 }
@@ -140,3 +143,21 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'web/static'),]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+# Recaptcha Secret Keys 
+RECAPTCHA_PUBLIC_KEY = os.getenv('CAPTCHA_SITE_KEY')
+RECAPTCHA_PRIVATE_KEY = os.getenv('CAPTCHA_SECRET_KEY')
+
+# SESSION CONFIGURATION
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_HTTP_ONLY = True
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_AGE = 60*60 # 1 hour
