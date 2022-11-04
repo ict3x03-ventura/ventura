@@ -13,20 +13,31 @@ from .decorators import check_recaptcha
 from .forms import UserForm, UserProfileForm, ContactForm
 from django.conf import settings
 from dotenv import load_dotenv
+from .mixins import FormErrors, RedirectParams, TokenGenerator, CreateEmail, ActivateTwoStep
 
 
 load_dotenv()
 
-# Create your views here.
+'''
+Index Views of Ventura
+'''
 def index(request):
     today = date.today()
     today = today.strftime("%m/%d/%Y")
     return render(request, 'home.html', {'date_placeholder': today})
 
 
+'''
+Login Views of Ventura
+'''
 def about(request):
     return render(request, 'about.html')
 
+
+
+'''
+Contact us Views of Ventura
+'''
 @check_recaptcha
 def contact(request):
     form = ContactForm()
@@ -40,6 +51,11 @@ def contact(request):
     context = {'form': form, 'secret_key': secret_key, 'alert': alert}
     return render(request, 'contact.html', context)
 
+
+
+'''
+Login Views of Ventura
+'''
 @check_recaptcha
 def loginPage(request):
     context = {'secret_key': secret_key}
@@ -62,6 +78,10 @@ def loginPage(request):
             print("Username or password does not exist")
     return render(request, 'login.html', context)
 
+
+'''
+Registration Page of Ventura
+'''
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('webindex')
@@ -103,15 +123,25 @@ def registerPage(request):
 def account(request):
     return render(request, 'account.html')
 
+'''
+List of rooms views in Ventura
+'''
 def room(request):
     room_list = HotelRoomImages.objects.all().select_related('room')
     context = {'room_list': room_list}
     return render(request, 'room.html', context)
 
+
+'''
+Logout views of Ventura
+'''
 def logoutUser(request):
     logout(request)
     return redirect('webindex')
 
+'''
+Payment views of Ventura
+'''
 @login_required(login_url='weblogin')
 def booking(request, room_id):
     
