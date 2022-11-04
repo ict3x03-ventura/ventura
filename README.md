@@ -8,7 +8,7 @@
 - `Docker`
 - `NodeJS for npm`
 
-## Installation
+## Installation'
 
 Instructions for how to download/install the code onto your machine.
 
