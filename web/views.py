@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
-from django.http import HttpResponse, request
+from django.http import HttpResponse, request, JsonResponse
 from django.template import loader
 from django.shortcuts import render
 from datetime import date
@@ -10,7 +10,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from ventura.settings import RECAPTCHA_PUBLIC_KEY as secret_key
 from .decorators import check_recaptcha
+from .forms import UserForm, UserProfileForm
+from django.conf import settings
+from dotenv import load_dotenv
 
+
+load_dotenv()
 
 # Create your views here.
 def index(request):
@@ -48,7 +53,42 @@ def loginPage(request):
     return render(request, 'login.html', context)
 
 def registerPage(request):
-    return render(request, 'register.html')
+    if request.user.is_authenticated:
+        return redirect(reverse('webindex'))
+    
+    u_form = UserForm()
+    p_form = UserProfileForm()
+    results = "error"
+    message = "Something went wrong. Please check and try again"
+
+    if request.method == 'POST':
+        u_form = UserForm(request.POST)
+        p_form = UserProfileForm(request.POST)
+
+        if u_form.is_valid() and p_form.is_valid():
+            user = u_form.save()
+            
+            #commit is false is used as userprofile.user can not be null
+            up = p_form.save(commit=False)
+            up.user = user
+            up.save()
+
+            # Mark User profile as inactive until verified
+            user.is_active = False
+            user.email = user.username
+            user.save() 
+
+            # results
+            results = "success"
+            message = "We sent you an SMS!"
+            context = {'results': results, 'message': message}
+            return redirect('weblogin')
+        else:
+            context = {'results': results, 'message': message}
+    
+    context = {'u_form': u_form, 'p_form': p_form}
+
+    return render(request, 'register.html', context)
 
 def account(request):
     return render(request, 'account.html')

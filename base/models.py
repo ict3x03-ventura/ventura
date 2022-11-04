@@ -1,15 +1,12 @@
 from email.policy import default
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 class Users(models.Model):
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=50, default="12345678")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
