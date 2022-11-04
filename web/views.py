@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from ventura.settings import RECAPTCHA_PUBLIC_KEY as secret_key
 from .decorators import check_recaptcha
-from .forms import Captcha
+
 
 # Create your views here.
 def index(request):
