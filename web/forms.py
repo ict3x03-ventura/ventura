@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm
 from django.contrib.auth.models import User
-from base.models import Users as baseModel, Feedback
+from base.models import Users as baseModel, Feedback, UserToken
 '''
 form that uses built in user creation form
 '''
@@ -79,3 +79,15 @@ class ContactForm(forms.ModelForm):
     def clean_message(self):
         message = self.cleaned_data['message']
         return message
+
+class TwoStepForm(forms.ModelForm):
+    two_step_code = forms.CharField(max_length=50, required=True,
+                                      widget=forms.TextInput(attrs={'class': 'form-control border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light',
+                                                                'placeholder': 'Enter code'}))
+    class Meta:
+        model = UserToken
+        fields = ('two_step_code',)
+
+    def clean_code(self):
+        two_step_code = self.cleaned_data['two_step_code']
+        return two_step_code
