@@ -4,12 +4,15 @@ from django.http import HttpResponse, request, JsonResponse
 from django.template import loader
 from django.shortcuts import render
 from datetime import date
-from base.models import HotelRoom, HotelRoomImages
+from base.models import HotelRoom, HotelRoomImages, UserToken
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from dotenv import load_dotenv
 from .decorators import check_recaptcha
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
 
 from .forms import (
                     UserForm,
@@ -52,7 +55,9 @@ Login Views of Ventura
 def about(request):
     return render(request, 'about.html')
 
-
+@login_required(login_url='weblogin')
+def booking(request):
+    return render(request, 'booking.html')
 
 '''
 Contact us Views of Ventura
