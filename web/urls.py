@@ -23,4 +23,6 @@ urlpatterns = [
     path('paymentconfirmation', views.paymentconfirmation, name='paymentconfirmation'),
     path('logout', views.logoutUser, name='weblogout'),
     re_path(r'^verify/(?P<uidb64>.+)/(?P<token>.+)/$', views.verification, name='verification'),
+    path('forgot-password', views.forgot_password, name='forgot-password'),
+    path('update-password', views.update_password, name='update-password'),
 ]

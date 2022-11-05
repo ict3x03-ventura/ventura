@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm, PasswordChangeForm, PasswordResetForm
 from django.contrib.auth.models import User
 from base.models import Users as baseModel, Feedback, UserToken
 '''
@@ -116,3 +116,53 @@ class AuthForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+'''
+Form that uses built in SetPasswordForm to create a password reset form
+'''
+class ForgottenPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(max_length=50, required=True,
+                                widget=forms.PasswordInput(attrs={'class': 'form-control border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light',
+                                                                'placeholder': 'New Password'}))
+    
+    new_password2 = forms.CharField(max_length=50, required=True,
+                                widget=forms.PasswordInput(attrs={'class': 'form-control border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light',
+                                                                'placeholder': 'Confirm Password'}))
+
+    class Meta:
+        model = User
+        fields = ('new_password1', 'new_password2')
+
+
+'''
+Form that uses the built in PasswordResetForm to create a requesting password reset form
+'''
+class RequestPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(max_length=50, required=True,
+                                widget=forms.TextInput(attrs={'class': 'form-control border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light',
+                                                                'placeholder': 'Username or Email'}))
+
+    class Meta:
+        model = User
+        fields = ('email',)
+
+'''
+Form that uses the built in PasswordChangeForm to create a password change form
+'''
+class UpdatePasswordForm(PasswordChangeForm):
+    old_password = forms.CharField(max_length=50, required=True,
+                                widget=forms.PasswordInput(attrs={'class': 'form-control border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light',
+                                                                'placeholder': 'Old Password'}))
+    
+    new_password1 = forms.CharField(max_length=50, required=True,
+                                widget=forms.PasswordInput(attrs={'class': 'form-control border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light',
+                                                                'placeholder': 'New Password'}))
+    
+    new_password2 = forms.CharField(max_length=50, required=True,
+                                widget=forms.PasswordInput(attrs={'class': 'form-control border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light',
+                                                                'placeholder': 'Confirm Password'}))
+
+    class Meta:
+        model = User
+        fields = ('old_password', 'new_password1', 'new_password2')
+
