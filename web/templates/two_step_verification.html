@@ -1,0 +1,45 @@
+{% extends 'main.html'%}
+{% load static %}
+
+{% block head %}
+<title> Two Step Verification </title>
+{% endblock %}
+
+{% block content %}
+<div style="padding-top: 5.0rem" class="ml-8">
+    <section class="bg-gray-900">
+        <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center  text-white">Contact Us</h2>
+            <p class="mb-8 lg:mb-16 font-light text-center  text-gray-400 sm:text-xl">Got a Special Event? Want to send feedback about our service? Need details about our Business plan? Let us know.</p>
+            <form method="POST" action="#" class="space-y-8">
+                {% csrf_token %}
+                {% if messages %}
+              {% for message in messages %}
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+              <li class="text-red-800">{{ message }}</li>
+              {% else %}
+              <li class="text-green-800">{{ message }}</li>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+
+              {% for field in ts_form %}
+              <div class="fieldWrapper text-red-800">
+                  {{ field.errors }}
+                  {% if field.help_text %}
+                  <p class="help">{{ field.help_text|safe }}</p>
+                  {% endif %}
+              </div>
+          {% endfor %}
+
+              
+                <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Verification Code</label>
+                    {{ ts_form.two_step_code }}
+                </div>
+                
+                <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 bg-blue-600 hover:bg-blue-700 focus:ring-primary-800">Verify Now</button>
+            </form>
+        </div>
+      </section>
+</div>
