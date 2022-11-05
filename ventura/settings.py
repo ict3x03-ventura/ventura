@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'web',
     'django_browser_reload',
     'base',
-    'rest_framework'
+    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
+
 
 ROOT_URLCONF = 'ventura.urls'
 
@@ -149,3 +151,28 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+# Recaptcha Secret Keys 
+RECAPTCHA_PUBLIC_KEY = os.getenv('CAPTCHA_SITE_KEY')
+RECAPTCHA_PRIVATE_KEY = os.getenv('CAPTCHA_SECRET_KEY')
+
+# SESSION CONFIGURATION
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_HTTP_ONLY = True
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_AGE = 60*60 # 1 hour
+
+# TWILIO CONFIGURATION [2FA]
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
+TWILIO_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
+
+# EMAIL CONFIGURATION [2FA]
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "alphonsekoh@gmail.com"
+DONOT_REPLY_EMAIL_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+DISPLAY_NAME = 'Ventura'
+CURRENT_SITE = 'http://localhost:8000'
