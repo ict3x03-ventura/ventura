@@ -8,6 +8,8 @@ from base.models import HotelRoom, HotelRoomImages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from dotenv import load_dotenv
+from .decorators import check_recaptcha
 
 from .forms import (
                     UserForm,
@@ -180,12 +182,15 @@ def logoutUser(request):
 Payment views of Ventura
 '''
 @login_required(login_url='weblogin')
-def booking(request, room_id):
+def payment(request, room_id):
     
     gst_calc = 0.07 
     context = {}
     return render(request, 'payment.html', context)
 
+@login_required(login_url='weblogin')
+def paymentconfirmation():
+    return render(request, 'paymentconfirmation.html')
 
 '''
 Function view to handle verification tokens

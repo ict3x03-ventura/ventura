@@ -23,7 +23,7 @@ class HotelRoom(models.Model):
     room_status = models.BooleanField(default=False)
     room_quantity = models.IntegerField(default=7)
     room_description = models.TextField(default="No description")
-    stripe_link = models.TextField()
+    stripe_link = models.TextField(default=None, null=True)
 
 
 class Reservations(models.Model):
