@@ -4,19 +4,25 @@ from django.http import HttpResponse, request, JsonResponse
 from django.template import loader
 from django.shortcuts import render
 from datetime import date
-from base.models import HotelRoom, HotelRoomImages
+from base.models import HotelRoom, HotelRoomImages, UserToken
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from ventura.settings import RECAPTCHA_PUBLIC_KEY as secret_key
 from .decorators import check_recaptcha
-from .forms import UserForm, UserProfileForm, ContactForm
 from django.conf import settings
 from dotenv import load_dotenv
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes
+from django.utils.encoding import force_bytes, force_str
 from .mixins import FormErrors, RedirectParams, TokenGenerator, CreateEmail, ActivateTwoStep
 import json
+
+from .forms import (
+                    UserForm,
+                    UserProfileForm, 
+                    ContactForm, 
+                    TwoStepForm
+                    )
 
 
 load_dotenv()
@@ -27,7 +33,15 @@ Index Views of Ventura
 def index(request):
     today = date.today()
     today = today.strftime("%m/%d/%Y")
-    return render(request, 'home.html', {'date_placeholder': today})
+
+    context = {'date_placeholder': today}
+    verified = request.session.get('verified', None)
+    if verified:
+        context["verified"] = True
+    else:
+        context["verified"] = False
+
+    return render(request, 'home.html', context)
 
 
 '''
@@ -123,13 +137,11 @@ def registerPage(request):
             results = "success"
             message = "We sent you an SMS!"
             context = {'results': results, 'message': message, 'url_safe': url_safe, 'make_token': make_token}
+            return redirect(f'verify/{url_safe}/{make_token}')
         else:
             message = FormErrors(u_form, p_form)
             context = {'results': results, 'message': message}
-        return HttpResponse(
-            json.dumps(context),
-            content_type="application/json"
-        )
+        
     
     context = {'u_form': u_form, 'p_form': p_form}
 
@@ -164,3 +176,75 @@ def booking(request, room_id):
     gst_calc = 0.07 
     context = {}
     return render(request, 'payment.html', context)
+
+
+'''
+Function view to handle verification tokens
+'''
+def verification(request, uidb64, token):
+
+	try:
+		uid = force_str(urlsafe_base64_decode(uidb64))
+		user = User.objects.get(pk=uid)
+		ut = UserToken.objects.get(user = user, token = token, is_active = True)
+		email_token = ut.is_email
+		password_token = ut.is_password
+
+	except(TypeError, ValueError, OverflowError, User.DoesNotExist, UserToken.DoesNotExist):
+
+		#user our RedirectParams function to redirect & append 'token_error' parameter to fire an error message
+		return RedirectParams(url = 'login', params = {"token_error": "true"})
+
+	#if User & UserToken exist...
+	if user and ut:
+
+		# if the token type is_email
+		if email_token:
+
+			#deactivate the token now that it has been used
+			ut.is_active = False
+			ut.save()
+
+			up = user.users
+			up.verified = True
+			up.save()
+						
+			#login the user
+			login(request, user)
+
+			#user our RedirectParams function to redirect & append 'verified' parameter to fire a success message
+			return RedirectParams(url = 'webindex', params = {"verified": "true"})
+
+		#else the token is for 2 step verification
+		else:
+			ts_form = TwoStepForm()
+			result = "error"
+			message = "Something went wrong. Please check and try again"
+
+			if request.method == "POST":
+				ts_form = TwoStepForm(data = request.POST)
+
+				if ts_form.is_valid():
+					
+					two_step_code = ts_form.cleaned_data.get('two_step_code')
+
+					if two_step_code == ut.two_step_code:
+						
+						user.is_active = True
+						user.save()
+
+						login(request, user)
+
+						#deactivate the token now that it has been used
+						ut.is_active = False
+						ut.save()
+						message = "Success! You are now signed in"
+						result = "perfect"
+						return RedirectParams('webindex', params = {"verified": "true"})
+					else:
+						messages.error(request, 'Invalid code')								
+				
+				
+			context = {'ts_form':ts_form, "uidb64":uidb64, "token":token}
+			
+			return render(request, 'two_step_verification.html', context)
