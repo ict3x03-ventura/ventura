@@ -317,38 +317,50 @@ def forgot_password(request):
 		rp_form = RequestPasswordResetForm(data = request.POST)
 
 		if rp_form.is_valid():
+			try:
+				username = rp_form.cleaned_data.get('email')
+				user = User.objects.get(username = username)
+				#create a new token
+				token = TokenGenerator()
+				make_token = token.make_token(user)
 			
-			username = rp_form.cleaned_data.get('email')
-			user = User.objects.get(username = username)
-			#create a new token
-			token = TokenGenerator()
-			make_token = token.make_token(user)
-			
-			ut = UserToken.objects.create(
-				user=user,
-			 	token = make_token,
-			 	is_password = True)
+				ut = UserToken.objects.create(
+					user=user,
+			 		token = make_token,
+			 		is_password = True)
 
 			#send email verification email
-			SendGridEmail(
-				request,
-				email_account = "donotreply",
-				subject = 'Password reset',
-				email = user.username,
-				cc = [],
-				template = "password_email.html",
-				token = make_token,
-				url_safe = urlsafe_base64_encode(force_bytes(user.pk))
-				)
-			result = "perfect"
-			message = "You will receive an email to reset your password"
-			
-		else:
-			message = FormErrors(rp_form)
+				SendGridEmail(
+					request,
+					email_account = "donotreply",
+					subject = 'Password reset',
+					email = user.username,
+					cc = [],
+					template = "password_email.html",
+					token = make_token,
+					url_safe = urlsafe_base64_encode(force_bytes(user.pk))
+					)
+				result = "perfect"
+				message = "You will receive an email to reset your password"
+				context = {'rp_form':rp_form, 'result':result, 'message':message}
+				return render(request, 'forgot_password.html', context)
+			except:
+				messages.error(request,'Invalid email address') 
 
 	context = {'rp_form':rp_form}
 	return render(request, 'forgot_password.html', context)
 
-
+@login_required
 def update_password(request):
-    return render(request, 'update_password.html')
+    up_form = UpdatePasswordForm(user=request.user)
+    if request.method == "POST":
+        up_form = UpdatePasswordForm(data = request.POST, user = request.user)
+        if up_form.is_valid():
+            up_form.save()
+            
+            return render(request, 'home.html', {'pw': 'true'})
+        else:
+            messages.error(request, FormErrors(up_form))
+    context = {'up_form':up_form}
+   
+    return render(request, 'update_password.html', context=context)
