@@ -40,6 +40,7 @@ class UserForm(UserCreationForm):
             raise forms.ValidationError("Email already exists")
         return username
     
+
 '''
 Basic model form that uses the Users model, extended from auth Model
 '''
@@ -57,6 +58,10 @@ class UserProfileForm(forms.ModelForm):
             raise forms.ValidationError("Phone number already exists")
         return phone_number
 
+
+'''
+Form that uses the model form to create a feedback form
+'''
 class ContactForm(forms.ModelForm):
     subject = forms.CharField(max_length=50, required=True,
                             
@@ -80,6 +85,9 @@ class ContactForm(forms.ModelForm):
         message = self.cleaned_data['message']
         return message
 
+'''
+Form that uses the model form to create a Verification form
+'''
 class TwoStepForm(forms.ModelForm):
     two_step_code = forms.CharField(max_length=50, required=True,
                                       widget=forms.TextInput(attrs={'class': 'form-control border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 shadow-sm-light',
