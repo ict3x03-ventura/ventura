@@ -168,11 +168,14 @@ TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
 TWILIO_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
 
 # EMAIL CONFIGURATION [2FA]
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+SENDGRID_API_KEY = os.getenv('EMAIL_API_KEY')
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "alphonsekoh@gmail.com"
-DONOT_REPLY_EMAIL_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = "apikey"
+DONOT_REPLY_EMAIL_PASSWORD = SENDGRID_API_KEY
 EMAIL_USE_TLS = True
 DISPLAY_NAME = 'Ventura'
-CURRENT_SITE = 'http://localhost:8000'
+CURRENT_SITE = 'http://127.0.0.1:8000'
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+SENDGRID_API_KEY = os.getenv('EMAIL_API_KEY')

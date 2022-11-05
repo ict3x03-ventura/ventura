@@ -19,7 +19,10 @@ from .forms import (
                     UserProfileForm, 
                     ContactForm, 
                     TwoStepForm,
-                    AuthForm
+                    AuthForm,
+                    ForgottenPasswordForm,
+                    RequestPasswordResetForm,
+                    UpdatePasswordForm
 )
 
 from .mixins import( 
@@ -27,7 +30,8 @@ from .mixins import(
                     RedirectParams,
                     TokenGenerator, 
                     CreateEmail, 
-                    ActivateTwoStep
+                    ActivateTwoStep,
+                    SendGridEmail
 )
 
 
@@ -210,9 +214,10 @@ def verification(request, uidb64, token):
 		password_token = ut.is_password
 
 	except(TypeError, ValueError, OverflowError, User.DoesNotExist, UserToken.DoesNotExist):
-
+        
 		#user our RedirectParams function to redirect & append 'token_error' parameter to fire an error message
-		return RedirectParams(url = 'login', params = {"token_error": "true"})
+		context = {'a_form': AuthForm(request.POST or None), 'secret_key': settings.RECAPTCHA_PUBLIC_KEY, 'token_error': 'True'}
+		return render(request, 'login.html', context)
 
 	#if User & UserToken exist...
 	if user and ut:
@@ -233,6 +238,34 @@ def verification(request, uidb64, token):
 
 			#user our RedirectParams function to redirect & append 'verified' parameter to fire a success message
 			return render(request, 'home.html', {'verified': True})
+
+		elif password_token:
+
+			fp_form = ForgottenPasswordForm(user = user)
+			result = "error"
+			message = "Something went wrong. Please check and try again"
+
+			if request.method == "POST":
+				fp_form = ForgottenPasswordForm(data = request.POST, user = user)
+
+				if fp_form.is_valid():
+					
+					fp_form.save()
+					login(request, user)
+
+					#deactivate the token now that it has been used
+					ut.is_active = False
+					ut.save()
+					message = "Your password has been updated"
+					result = "perfect"
+					context = {"date_placeholder": date_handler() ,"pw":"true"}
+					return render(request, 'home.html', context)			
+				else:
+					message = FormErrors(fp_form)
+				
+
+			context = {'fp_form':fp_form, "uidb64":uidb64, "token":token}
+			return render(request, 'reset-password.html', context)
 
 		#else the token is for 2 step verification
 		else:
@@ -262,9 +295,60 @@ def verification(request, uidb64, token):
 						params = {'date_placeholder': date_handler(), 'verified': 'true'}
 						return render(request, 'home.html', params)
 					else:
-						messages.error(request, 'Invalid code')								
+						messages.error(request, 'Invalid code')
+				else:
+					message = FormErrors(ts_form)							
 				
 				
 			context = {'ts_form':ts_form, "uidb64":uidb64, "token":token}
 			
 			return render(request, 'two_step_verification.html', context)
+
+'''
+Basic view for users to request a new password
+'''
+def forgot_password(request):
+
+	rp_form = RequestPasswordResetForm()
+	result = "error"
+	message = "Something went wrong. Please check and try again"
+
+	if request.method == "POST":
+		rp_form = RequestPasswordResetForm(data = request.POST)
+
+		if rp_form.is_valid():
+			
+			username = rp_form.cleaned_data.get('email')
+			user = User.objects.get(username = username)
+			#create a new token
+			token = TokenGenerator()
+			make_token = token.make_token(user)
+			
+			ut = UserToken.objects.create(
+				user=user,
+			 	token = make_token,
+			 	is_password = True)
+
+			#send email verification email
+			SendGridEmail(
+				request,
+				email_account = "donotreply",
+				subject = 'Password reset',
+				email = user.username,
+				cc = [],
+				template = "password_email.html",
+				token = make_token,
+				url_safe = urlsafe_base64_encode(force_bytes(user.pk))
+				)
+			result = "perfect"
+			message = "You will receive an email to reset your password"
+			
+		else:
+			message = FormErrors(rp_form)
+
+	context = {'rp_form':rp_form}
+	return render(request, 'forgot_password.html', context)
+
+
+def update_password(request):
+    return render(request, 'update_password.html')

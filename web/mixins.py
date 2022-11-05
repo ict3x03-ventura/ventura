@@ -15,6 +15,8 @@ import phonenumbers
 
 
 from twilio.rest import Client as TwilioClient
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 
 
@@ -81,6 +83,7 @@ class CreateEmail:
 		self.url_safe = kwargs.get("url_safe")
 		#23515
 
+
 		domain = settings.CURRENT_SITE
 
 		context = {
@@ -96,9 +99,9 @@ class CreateEmail:
 
 		email_accounts = {
 			"donotreply": {
-				'name': settings.EMAIL_HOST_USER,
+				'name': 'Hotel Ventura',
 				'password':settings.DONOT_REPLY_EMAIL_PASSWORD,
-				'from':settings.EMAIL_HOST_USER,
+				'from':"hotelventura@b.com",
 				'display_name': settings.DISPLAY_NAME},
 		}
 
@@ -106,22 +109,14 @@ class CreateEmail:
 		html_content = render_to_string(self.template, context ) # render with dynamic value
 		text_content = strip_tags(html_content) # Strip the html tag. So people can see the pure text at least.
 
-		with get_connection(
-			    host= settings.EMAIL_HOST, 
-			    port= settings.EMAIL_PORT, 
-			    username=email_accounts[self.email_account]["name"], 
-			    password=email_accounts[self.email_account]["password"], 
-			    use_tls=settings.EMAIL_USE_TLS,
-			) as connection:
-				msg = EmailMultiAlternatives(
-					self.subject,
-				 	text_content,
-				 	f'{email_accounts[self.email_account]["display_name"]} <{email_accounts[self.email_account]["from"]}>',
-				 	[self.email],
-				 	cc=[self.cc_email],
-				 	connection=connection)
-				msg.attach_alternative(html_content, "text/html")
-				msg.send()
+		msg = EmailMultiAlternatives(
+			self.subject,
+			text_content,
+			f'{email_accounts[self.email_account]["display_name"]} <{email_accounts[self.email_account]["from"]}>',
+			[self.email],
+			)
+		msg.attach_alternative(html_content, "text/html")
+		msg.send()
 
 
 
@@ -183,3 +178,57 @@ class ActivateTwoStep:
 		send_sms = CreateSMS(
 			number = telephone,
 			message = f'Your Hotel Ventura verification code is: {code}')
+
+class SendGridEmail:
+
+	def __init__(self, request, *args, **kwargs):
+
+		self.email_account = kwargs.get("email_account")
+		self.subject = kwargs.get("subject", "")
+		self.email = kwargs.get("email")
+		self.template = kwargs.get("template")
+		self.context = kwargs.get("context")
+		self.cc_email = kwargs.get("cc_email")
+		self.token = kwargs.get("token")
+		self.url_safe = kwargs.get("url_safe")
+		#23515
+
+
+		domain = settings.CURRENT_SITE
+
+		context = {
+			"user": request.user,
+			"domain": domain,
+		}
+
+		if self.token:
+			context["token"] = self.token
+		
+		if self.url_safe:
+			context["url_safe"] = self.url_safe
+
+		email_accounts = {
+			"donotreply": {
+				'name': 'Hotel Ventura',
+				'password':settings.DONOT_REPLY_EMAIL_PASSWORD,
+				'from':"hotelventura@b.com",
+				'display_name': settings.DISPLAY_NAME},
+		}
+
+
+		html_content = render_to_string(self.template, context ) # render with dynamic value
+		text_content = strip_tags(html_content) # Strip the html tag. So people can see the pure text at least.
+
+		message = Mail(
+			from_email='hotelventura@kohhuanyin.com',
+			to_emails=self.email,
+			subject=self.subject,
+			html_content=html_content)
+		try:
+			sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+			response = sg.send(message)
+			print(response.status_code)
+			print(response.body)
+			print(response.headers)
+		except Exception as e:
+			print(e.message)
