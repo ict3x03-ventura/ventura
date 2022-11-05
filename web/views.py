@@ -38,17 +38,16 @@ load_dotenv()
 Index Views of Ventura
 '''
 def index(request):
-    today = date.today()
-    today = today.strftime("%m/%d/%Y")
+    
 
-    context = {'date_placeholder': today}
-    verified = request.session.get('verified', None)
-    if verified:
-        context["verified"] = True
-    else:
-        context["verified"] = False
+    context = {'date_placeholder': date_handler(), 'verified': 'false'}
 
     return render(request, 'home.html', context)
+
+def date_handler():
+    today = date.today()
+    today = today.strftime("%m/%d/%Y")
+    return today
 
 
 '''
@@ -263,7 +262,8 @@ def verification(request, uidb64, token):
 						ut.save()
 						message = "Success! You are now signed in"
 						result = "perfect"
-						return redirect('/', kwargs={'verified': True})
+						params = {'date_placeholder': date_handler(), 'verified': 'true'}
+						return redirect('/', params)
 					else:
 						messages.error(request, 'Invalid code')								
 				
