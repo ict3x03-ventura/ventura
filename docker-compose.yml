@@ -1,8 +1,8 @@
 version: "3.6"
 services:
   db:
-    platform: linux/amd64
-    user: root
+    # platform: linux/amd64
+    # user: root
     image: postgres:15-bullseye
     restart: always
     volumes:
@@ -20,8 +20,8 @@ services:
         ipv4_address: 172.22.0.3
   
   pgadmin:
-    platform: linux/amd64
-    user: root
+    # platform: linux/amd64
+    # user: root
     image: dpage/pgadmin4
     restart: always
     volumes:
