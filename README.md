@@ -1,6 +1,6 @@
 # Ventura
 
-## Requirements'  
+## Requirements
 
 - `python` ^3.6
 - `pip`
