@@ -99,3 +99,20 @@ class TwoStepForm(forms.ModelForm):
     def clean_code(self):
         two_step_code = self.cleaned_data['two_step_code']
         return two_step_code
+
+
+'''
+Form that uses the built in form to create a login form
+'''
+class AuthForm(AuthenticationForm):
+    username = forms.EmailField(max_length=50, required=True,
+                                widget=forms.TextInput(attrs={'class': 'form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none',
+                                                                'placeholder': 'Username or Email'}))
+    
+    password = forms.CharField(max_length=50, required=True,
+                                widget=forms.PasswordInput(attrs={'class': 'form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none',
+                                                                'placeholder': 'Password'}))
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')

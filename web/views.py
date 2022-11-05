@@ -8,21 +8,28 @@ from base.models import HotelRoom, HotelRoomImages, UserToken
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from ventura.settings import RECAPTCHA_PUBLIC_KEY as secret_key
 from .decorators import check_recaptcha
 from django.conf import settings
 from dotenv import load_dotenv
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
-from .mixins import FormErrors, RedirectParams, TokenGenerator, CreateEmail, ActivateTwoStep
 import json
 
 from .forms import (
                     UserForm,
                     UserProfileForm, 
                     ContactForm, 
-                    TwoStepForm
-                    )
+                    TwoStepForm,
+                    AuthForm
+)
+
+from .mixins import( 
+                    FormErrors,
+                    RedirectParams,
+                    TokenGenerator, 
+                    CreateEmail, 
+                    ActivateTwoStep
+)
 
 
 load_dotenv()
@@ -65,7 +72,7 @@ def contact(request):
             messages.success(request, 'Your message has been sent!')
             form.save()
         
-    context = {'form': form, 'secret_key': secret_key, 'alert': alert}
+    context = {'form': form, 'secret_key': settings.RECAPTCHA_PUBLIC_KEY, 'alert': alert}
     return render(request, 'contact.html', context)
 
 
@@ -75,24 +82,40 @@ Login Views of Ventura
 '''
 @check_recaptcha
 def loginPage(request):
-    context = {'secret_key': secret_key}
-    if request.method == 'POST':
-        
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        try:
-            user = User.objects.get(username=username)
-        except:
-            print("Username or password does not exist")
-        
+    a_form = AuthForm()
+    results = "error"
+    message = "Something went wrong. Please check and try again"
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None and request.recaptcha_is_valid:
-            login(request, user)
-            return redirect('webindex')
-        else:
-            messages.error(request, 'Username OR password is incorrect')
-            print("Username or password does not exist")
+    if request.user.is_authenticated:
+        return redirect('webindex')
+    
+    if request.method == 'POST':
+        a_form = AuthForm(data=request.POST)
+        if a_form.is_valid() and request.recaptcha_is_valid:
+            username = a_form.cleaned_data.get('username')
+            password = a_form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None :
+
+                # check if user 2FA is active
+                if user.users.two_step_active:
+                    # create new token
+                    token = TokenGenerator()
+                    make_token = token.make_token(user)
+                    url_safe = urlsafe_base64_encode(force_bytes(user.pk))
+                    
+                    # create and send sms code
+                    sms_code = ActivateTwoStep(user=user, token=make_token)
+                    message = "We sent you an SMS!"
+                    results = "success"
+                    return redirect(f'verify/{url_safe}/{make_token}')
+                else:
+                    login(request, user)
+                    return redirect('webindex')
+            else:
+                messages.error(request, 'Username OR password is incorrect')
+                results = "error"
+    context = {'secret_key': settings.RECAPTCHA_PUBLIC_KEY, 'a_form': a_form}
     return render(request, 'login.html', context)
 
 
@@ -240,7 +263,7 @@ def verification(request, uidb64, token):
 						ut.save()
 						message = "Success! You are now signed in"
 						result = "perfect"
-						return RedirectParams('webindex', params = {"verified": "true"})
+						return redirect('/', kwargs={'verified': True})
 					else:
 						messages.error(request, 'Invalid code')								
 				

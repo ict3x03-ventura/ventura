@@ -33,26 +33,19 @@
                   {% endif %}
                   {% endfor %}
                   {% endif %}
+
+                  
+                  <div class="text-red-800">
+                      {{ a_form.errors }}
+                  </div>
+              
+
                   <p class="mb-4">Please login to your account:</p>
                   <div class="mb-4">
-                    <input
-                      type="username"
-                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      name="username"
-                      placeholder="Username"
-                    />
+                    {{ a_form.username }}
                   </div>
                   <div class="mb-4">
-                    <input
-                      type="password"
-                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      name="password"
-                      placeholder="Password"
-                    />
-
-
-
-
+                    {{ a_form.password }}
                   </div>
                   <script src='https://www.google.com/recaptcha/api.js'></script>
                   <div class="g-recaptcha" data-sitekey="{{secret_key}}"></div>
