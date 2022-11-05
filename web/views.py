@@ -4,16 +4,12 @@ from django.http import HttpResponse, request, JsonResponse
 from django.template import loader
 from django.shortcuts import render
 from datetime import date
-from base.models import HotelRoom, HotelRoomImages, UserToken
+from base.models import HotelRoom, HotelRoomImages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .decorators import check_recaptcha
-from django.conf import settings
 from dotenv import load_dotenv
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
-import json
+from .decorators import check_recaptcha
 
 from .forms import (
                     UserForm,
@@ -172,18 +168,11 @@ def registerPage(request):
 def account(request):
     return render(request, 'account.html')
 
-'''
-List of rooms views in Ventura
-'''
 def room(request):
     room_list = HotelRoomImages.objects.all().select_related('room')
     context = {'room_list': room_list}
     return render(request, 'room.html', context)
 
-
-'''
-Logout views of Ventura
-'''
 def logoutUser(request):
     logout(request)
     return redirect('webindex')
@@ -193,12 +182,15 @@ def logoutUser(request):
 Payment views of Ventura
 '''
 @login_required(login_url='weblogin')
-def booking(request, room_id):
+def payment(request, room_id):
     
     gst_calc = 0.07 
     context = {}
     return render(request, 'payment.html', context)
 
+@login_required(login_url='weblogin')
+def paymentconfirmation():
+    return render(request, 'paymentconfirmation.html')
 
 '''
 Function view to handle verification tokens

@@ -16,10 +16,11 @@ urlpatterns = [
     path('contact', views.contact, name='webcontact'),
     path('login', views.loginPage, name='weblogin'),
     path('register', views.registerPage, name='webregister'),
-    path('payment/<int:room_id>', views.booking, name='webpayment'),
+    path('payment/<int:room_id>', views.payment, name='webpayment'),
     path('account', views.account, name='webaccount'),
     path('room', views.room, name='webroom'),
-    path('booking', views.booking, name='paybooking'),
+    # path('booking', views.booking, name='paybooking'),
+    path('paymentconfirmation', views.paymentconfirmation, name='paymentconfirmation'),
     path('logout', views.logoutUser, name='weblogout'),
     re_path(r'^verify/(?P<uidb64>.+)/(?P<token>.+)/$', views.verification, name='verification'),
 ]
