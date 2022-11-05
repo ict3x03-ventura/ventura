@@ -232,7 +232,7 @@ def verification(request, uidb64, token):
 			login(request, user)
 
 			#user our RedirectParams function to redirect & append 'verified' parameter to fire a success message
-			return RedirectParams(url = 'webindex', params = {"verified": "true"})
+			return render(request, 'home.html', {'verified': True})
 
 		#else the token is for 2 step verification
 		else:
@@ -260,7 +260,7 @@ def verification(request, uidb64, token):
 						message = "Success! You are now signed in"
 						result = "perfect"
 						params = {'date_placeholder': date_handler(), 'verified': 'true'}
-						return redirect('/', params)
+						return render(request, 'home.html', params)
 					else:
 						messages.error(request, 'Invalid code')								
 				
