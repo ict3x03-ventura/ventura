@@ -31,17 +31,9 @@ class Reservations(models.Model):
     booking_id=models.CharField(max_length=50, default=None, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-
-
-class Payments(models.Model):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
-    reservation = models.ForeignKey(Reservations, on_delete=models.CASCADE)
-    payment_amount = models.FloatField()
-    payment_date = models.DateTimeField(auto_now_add=True)
-    payment_status = models.CharField(max_length=50)
-
-
+    start_date = models.DateField(default='1995-12-12')
+    end_date = models.DateField(default='1995-12-12')
+    multiplier = models.IntegerField(default=1)
 
 class HotelRoomImages(models.Model):
     room = models.ForeignKey(HotelRoom, on_delete=models.CASCADE)
@@ -51,8 +43,6 @@ class Feedback(models.Model):
     email = models.CharField(max_length=150, default=None, blank=True, null=True)
     subject = models.TextField(default=None, blank=True, null=True)
     message = models.TextField(default=None, blank=True, null=True)
-
-
 
 class UserToken(models.Model):
     updated_at = models.DateTimeField(auto_now=True)

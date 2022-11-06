@@ -220,7 +220,7 @@ Payment views of Ventura
 def payment(request, room_id):
     
     gst_calc = 0.07 
-    context = {}
+    context = {'date': date_handler(), 'room_id': room_id, 'gst': gst_calc}
     return render(request, 'payment.html', context)
 
 @login_required(login_url='weblogin')
