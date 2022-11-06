@@ -1,11 +1,13 @@
 pipeline {
-    agent {
-        docker { image 'ubuntu:latest' }
-    }
+    agent any
     stages {
         stage('OWASP DependencyCheck'){
             steps {
                 dependencyCheck additionalArguments: '--formal HTML --format XML', odcInstallation: 'OWASP'
+            }
+            post {
+                success { 
+                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'}
             }
         }
  
