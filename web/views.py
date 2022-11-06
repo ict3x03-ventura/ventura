@@ -184,7 +184,8 @@ def room(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect('webindex')
+    context ={'message': 'You have been logged out', 'log':"out"}
+    return render(request, 'login.html', context)
 
 
 '''
