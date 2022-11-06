@@ -16,7 +16,7 @@
 <div class="min-w-screen min-h-screen bg-gray-800 py-5">
     <div class="px-5">
         <div class="mb-2">
-            <a href="#" class="focus:outline-none hover:underline text-white text-sm">Fill in the fields and check thoroughly before proceeding.</a>
+            <a href="#" class="focus:outline-none hover:underline text-white text-sm">Hi {{user.username}}, fill in the fields and check thoroughly before proceeding.</a>
         </div>
 
     <div class="w-full bg-gray-800 border-t border-b border-gray-200 px-5 py-10 text-gray-800">
@@ -30,18 +30,18 @@
                                 <img src="{%static 'image/deluxeroom2.jpg'%}" alt="roomtype">
                             </div>
                             <div class="flex-grow pl-3">
-                                <h6 class="font-semibold uppercase text-white">Deluxe Room</h6>
+                                <h6 class="font-semibold uppercase text-white">{{room_list.room.room_type}}</h6>
                                 <p class="text-gray-400">x 1</p>
                             </div>
                             <div>
-                                <span class="font-semibold text-white text-xl">$210.00</span>
+                                <span class="font-semibold text-white text-xl">${{room_list.room.room_price}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="mb-6 pb-6 border-b border-gray-200">
                         <div class="-mx-2 flex items-end justify-end">
                             <div class="flex-grow px-2">
-                                <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Room descriptions etc.....</label>
+                                <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">{{room_list.room.room_description}}</label>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <span class="text-white">Subtotal</span>
                             </div>
                             <div class="pl-3">
-                                <span class="font-semibold">$210.00</span>
+                                <span class="font-semibold">${{room_list.room.room_price|floatformat:2}}</span>
                             </div>
                         </div>
                         <div class="w-full flex items-center">
@@ -59,7 +59,7 @@
                                 <span class="text-white">Taxes (GST)</span>
                             </div>
                             <div class="pl-3">
-                                <span class="font-semibold">$14.70</span>
+                                <span class="font-semibold">incl</span>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                 <span class="text-white">Total</span>
                             </div>
                             <div class="pl-3">
-                                <span class="font-semibold text-white text-sm">SGD</span> <span class="font-semibold">$210.00</span>
+                                <span class="font-semibold text-white text-sm">SGD</span> <span class="font-semibold">${{room_list.room.room_price|floatformat:2}}</span>
                             </div>
                         </div>
                     </div>
@@ -78,18 +78,18 @@
                     <div class="w-full mx-auto rounded-lg bg-gray-800 border border-gray-200 p-3 text-gray-400 font-light mb-6">
                         <div class="w-full flex mb-3 items-center">
                             <div class="w-32">
-                                <span class="text-white font-semibold">Payment</span>
+                                <span class="text-white font-semibold">Name</span>
                             </div>
                             <div class="flex-grow pl-3">
-                                <span>Nur Fadhilah</span>
+                                <span>{{user.first_name}} {{user.last_name}}</span>
                             </div>
                         </div>
                         <div class="w-full flex items-center">
                             <div class="w-32">
-                                <span class="text-white font-semibold">Billing Address</span>
+                                <span class="text-white font-semibold">Email</span>
                             </div>
                             <div class="flex-grow pl-3">
-                                <span>123 Nanyang Poly, SIT, Singapore</span>
+                                <span>{{user.email}}</span>
                             </div>
                         </div>
                     </div>
@@ -102,62 +102,34 @@
                             </div>
                             <div>
                                 <div class="mb-3">
-                                    <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Name on card</label>
-                                    <div>
-                                        <input class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Nur Fadhilah" type="text"/>
-                                    </div>
+                                    <label class="text-white font-semibold text-sm mb-2 ml-1">Select your preffered dates:</label>
+                                    
                                 </div>
-                                <div class="mb-3">
-                                    <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Card number</label>
-                                    <div>
-                                        <input class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="0000 0000 0000 0000 " type="text"/>
+                                <!-- Booking Datepicker -->
+                                <div date-rangepicker class="flex items-center">
+                                    <div class="relative">
+                                      <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                          <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                      </div>
+                                      <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
                                     </div>
-                                </div>
-                                <div class="mb-3 -mx-2 flex items-end">
-                                    <div class="px-2 w-1/4">
-                                        <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Expiration date</label>
-                                        <div>
-                                            <select class="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
-                                                <option value="01">01 - January</option>
-                                                <option value="02">02 - February</option>
-                                                <option value="03">03 - March</option>
-                                                <option value="04">04 - April</option>
-                                                <option value="05">05 - May</option>
-                                                <option value="06">06 - June</option>
-                                                <option value="07">07 - July</option>
-                                                <option value="08">08 - August</option>
-                                                <option value="09">09 - September</option>
-                                                <option value="10">10 - October</option>
-                                                <option value="11">11 - November</option>
-                                                <option value="12">12 - December</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="px-2 w-1/4">
-                                        <select class="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
-                                            <option value="2022">2022</option>
-                                            <option value="2023">2023</option>
-                                            <option value="2024">2024</option>
-                                            <option value="2025">2025</option>
-                                            <option value="2026">2026</option>
-                                            <option value="2027">2027</option>
-                                            <option value="2028">2028</option>
-                                        </select>
-                                    </div>
-                                    <div class="px-2 w-1/4">
-                                        <label class="text-gray-400 font-semibold text-sm mb-2 ml-1">Security code</label>
-                                        <div>
-                                            <input class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="000" type="text"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    <span class="mx-4 text-gray-500">to</span>
+                                    <div class="relative">
+                                      <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                          <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                      </div>
+                                      <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                                  </div>
+                                  </div>
+<!-- End Booking Datepicker -->
+                                
+                            </div> 
                         </div>
 
                     </div>
                     <div>
                         <button type="submit" class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full" data-mdb-ripple="true" data-mdb-ripple-color="light">
-                            Pay Now
+                            <a href="{{room_list.room.stripe_link}}" target="_blank">Checkout with Stripe</a>
                         </button>
                     </div>
                 </div>

@@ -4,6 +4,7 @@
 
 {% block head %}
 <script src="https://cdn.tailwindcss.com"></script>
+<title>Register User</title>
 {% endblock %}
 
 {% block content %}
@@ -23,55 +24,34 @@
 {#                  />#}
 {#                  <h4 class="text-xl font-semibold mt-1 mb-12 pb-1">Add in slogan</h4>#}
 {#                </div>#}
-                <form>
+                <form method="POST" action="">
+                  {% csrf_token %}
                   <p class="mb-4">Fill in the fields below:</p>
+                  {% for field in u_form %}
+                  <div class="fieldWrapper text-red-800">
+                      {{ field.errors }}
+                      {% if field.help_text %}
+                      <p class="help">{{ field.help_text|safe }}</p>
+                      {% endif %}
+                  </div>
+              {% endfor %}
                   <div class="mb-4">
-                    <input
-                      type="text"
-                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      id="exampleFormControlInput1"
-                      placeholder="Username"
-                    />
+                    {{u_form.username}}
                   </div>
                   <div class="mb-4">
-                    <input
-                      type="password"
-                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      id="exampleFormControlInput1"
-                      placeholder="Password"
-                    />
+                    {{u_form.password1}}
                   </div>
                     <div class="mb-4">
-                    <input
-                      type="email"
-                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      id="exampleFormControlInput1"
-                      placeholder="Email"
-                    />
+                    {{u_form.password2}}
                   </div>
                     <div class="mb-4">
-                    <input
-                      type="firstname"
-                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      id="exampleFormControlInput1"
-                      placeholder="First Name"
-                    />
+                    {{u_form.first_name}}
                   </div>
                     <div class="mb-4">
-                    <input
-                      type="lastname"
-                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      id="exampleFormControlInput1"
-                      placeholder="Last Name"
-                    />
+                    {{u_form.last_name}}
                   </div>
                     <div class="mb-4">
-                    <input
-                      type="phonenumber"
-                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      id="exampleFormControlInput1"
-                      placeholder="Phone Number"
-                    />
+                    {{p_form.phone_number}}
                   </div>
 
                   <div class="text-center pt-1 mb-12 pb-1">

@@ -26,6 +26,11 @@
                 Register
               </a>
             </li>
+            <li>
+              <a href="{%url 'forgot-password'%}" class="block py-2 px-4 hover:bg-gray-600 hover:text-white text-xs font-bold">
+                <img src="{% static '/image/lock.svg' %}" class="inline-block h-5 w-5 mr-2" alt="booking">
+                Forgot Password</a>
+            </li>
             {% else %}
             <li>
               <a href="{%url 'paybooking'%}" class="block py-2 px-4 hover:bg-gray-600 hover:text-white">
@@ -33,9 +38,9 @@
                 Bookings</a>
             </li>
             <li>
-              <a href="{%url 'usersetting'%}" class="block py-2 px-4 hover:bg-gray-600 hover:text-white">
-                <img src="{% static '/image/settings.svg' %}" class="inline-block h-5 w-5 mr-2" alt="setting">
-                Settings</a>
+              <a href="{%url 'update-password'%}" class="block py-2 px-4 hover:bg-gray-600 hover:text-white text-xs font-bold">
+                <img src="{% static '/image/lock.svg' %}" class="inline-block h-5 w-5 mr-2" alt="booking">
+                Update Password</a>
             </li>
           </ul>
             <div class="py-1 text-sm text-gray-200"> 

@@ -135,3 +135,7 @@ node_modules/
 
 # Seed data files
 seed/*
+
+#pg 
+pg_data/*
+pgadmin_data/*
