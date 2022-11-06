@@ -13,8 +13,7 @@ class Users(models.Model):
     is_active = models.BooleanField(default=True)
     verified = models.BooleanField(default=False)
     two_step_active = models.BooleanField(default=True)
-    def __str__(self):
-        return f'{self.user}'
+
 
 
 class HotelRoom(models.Model):
@@ -33,8 +32,6 @@ class Reservations(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f'{self.user} - {self.room}'
 
 
 class Payments(models.Model):
@@ -44,8 +41,6 @@ class Payments(models.Model):
     payment_date = models.DateTimeField(auto_now_add=True)
     payment_status = models.CharField(max_length=50)
 
-    def __str__(self):
-        return f'{self.user} - {self.reservation} - {self.payment_amount}'
 
 
 class HotelRoomImages(models.Model):
@@ -57,8 +52,7 @@ class Feedback(models.Model):
     subject = models.TextField(default=None, blank=True, null=True)
     message = models.TextField(default=None, blank=True, null=True)
 
-    def __str__(self):
-        return f'{self.email} - {self.subject}'
+
 
 class UserToken(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
@@ -72,5 +66,4 @@ class UserToken(models.Model):
     is_sms = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
-    def __str__(self):
-        return f'{self.user}'
+
