@@ -5,7 +5,9 @@ from django.contrib import messages
 
 import requests
 
-
+'''
+Decorators wrapper for recaptcha for reusablity purposes
+'''
 def check_recaptcha(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):

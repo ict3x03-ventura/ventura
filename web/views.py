@@ -4,7 +4,6 @@ from django.http import HttpResponse, request, JsonResponse
 from django.template import loader
 from django.shortcuts import render
 from datetime import date
-from base.models import HotelRoom, HotelRoomImages, UserToken
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -13,6 +12,7 @@ from dotenv import load_dotenv
 from .decorators import check_recaptcha
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
+import logging 
 
 from .forms import (
                     UserForm,
@@ -34,6 +34,11 @@ from .mixins import(
                     SendGridEmail
 )
 
+from base.models import (
+                        HotelRoomImages, 
+                        UserToken,
+                        Reservations
+)
 
 load_dotenv()
 
@@ -47,6 +52,10 @@ def index(request):
 
     return render(request, 'home.html', context)
 
+
+'''
+Helper Functions for the views
+'''
 def date_handler():
     today = date.today()
     today = today.strftime("%m/%d/%Y")
@@ -59,9 +68,20 @@ Login Views of Ventura
 def about(request):
     return render(request, 'about.html')
 
+
+'''
+Booking Views of Ventura
+'''
 @login_required(login_url='weblogin')
 def booking(request):
-    return render(request, 'booking.html')
+    
+    # extract uid
+    uid = request.user.id
+    reserve_list = Reservations.objects.filter(user_id=uid).select_related('room')
+    logging.warn(reserve_list.values())
+    context ={'reserve_list': reserve_list}
+    return render(request, 'booking.html', context)
+
 
 '''
 Contact us Views of Ventura
@@ -177,14 +197,20 @@ def registerPage(request):
 def account(request):
     return render(request, 'account.html')
 
+
+'''
+Room Views of Ventura
+'''
 def room(request):
     room_list = HotelRoomImages.objects.all().select_related('room')
+    logging.warn(room_list.values())
     context = {'room_list': room_list}
     return render(request, 'room.html', context)
 
 def logoutUser(request):
     logout(request)
-    return redirect('webindex')
+    context ={'message': 'You have been logged out', 'log':"out"}
+    return render(request, 'home.html', context)
 
 
 '''
@@ -350,7 +376,11 @@ def forgot_password(request):
 	context = {'rp_form':rp_form}
 	return render(request, 'forgot_password.html', context)
 
-@login_required
+
+'''
+Update Password View for users to update their password
+'''
+@login_required(login_url='weblogin')
 def update_password(request):
     up_form = UpdatePasswordForm(user=request.user)
     if request.method == "POST":

@@ -1,0 +1,59 @@
+{%extends 'main.html'%}
+{% load static %}
+
+{% block head %}
+<title>Booking Logs</title>
+{% endblock %}
+{% block content %}
+<div style="padding-top: 5.0rem">
+    <section class="bg-gray-900">
+		<div class="overflow-x-auto relative shadow-md sm:rounded-lg mx-20 my-20">
+			<table class="w-full text-sm text-left text-gray-500 text-gray-400">
+				<caption class="p-5 text-lg font-semibold text-left text-white bg-gray-800">
+					Your Booking Logs
+					<p class="mt-1 text-sm font-normal text-gray-500 text-gray-400">Browse and monitor what rooms you have booked within your stay in Hotel Ventura! The staffs in Ventura Group wishes your stay in the hotel was a good and memorable one. </p>
+				</caption>
+				<thead class="text-xs uppercase bg-gray-700 text-gray-400">
+					<tr>
+						<th scope="col" class="py-3 px-6">
+							Room Type
+						</th>
+						<th scope="col" class="py-3 px-6">
+							Booking ID
+						</th>
+						<th scope="col" class="py-3 px-6">
+							Room Price
+						</th>
+						<th scope="col" class="py-3 px-6">
+							Date Booked
+						</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					{% for item in reserve_list %}
+					<tr class= border-b bg-gray-800 border-gray-700">
+						
+						<th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white">
+							{{item.room.room_type}}
+						</th>
+						<td class="py-4 px-6">
+							{{item.booking_id}}
+						</td>
+						<td class="py-4 px-6">
+							{{item.room.room_price}}
+						</td>
+						<td class="py-4 px-6">
+							{{item.created_at}}
+						</td>
+					</tr>
+					{% endfor %}
+
+
+				</tbody>
+				
+			</table>
+		</div>
+    </section>
+</div>
+{% endblock %}
