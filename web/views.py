@@ -52,6 +52,10 @@ def index(request):
 
     return render(request, 'home.html', context)
 
+
+'''
+Helper Functions for the views
+'''
 def date_handler():
     today = date.today()
     today = today.strftime("%m/%d/%Y")
@@ -64,6 +68,10 @@ Login Views of Ventura
 def about(request):
     return render(request, 'about.html')
 
+
+'''
+Booking Views of Ventura
+'''
 @login_required(login_url='weblogin')
 def booking(request):
     
@@ -73,6 +81,7 @@ def booking(request):
     logging.warn(reserve_list.values())
     context ={'reserve_list': reserve_list}
     return render(request, 'booking.html', context)
+
 
 '''
 Contact us Views of Ventura
@@ -188,6 +197,10 @@ def registerPage(request):
 def account(request):
     return render(request, 'account.html')
 
+
+'''
+Room Views of Ventura
+'''
 def room(request):
     room_list = HotelRoomImages.objects.all().select_related('room')
     logging.warn(room_list.values())
@@ -363,6 +376,10 @@ def forgot_password(request):
 	context = {'rp_form':rp_form}
 	return render(request, 'forgot_password.html', context)
 
+
+'''
+Update Password View for users to update their password
+'''
 @login_required(login_url='weblogin')
 def update_password(request):
     up_form = UpdatePasswordForm(user=request.user)

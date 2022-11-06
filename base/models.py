@@ -13,8 +13,7 @@ class Users(models.Model):
     is_active = models.BooleanField(default=True)
     verified = models.BooleanField(default=False)
     two_step_active = models.BooleanField(default=True)
-    def __str__(self):
-        return f'{self.user}'
+
 
 
 class HotelRoom(models.Model):
@@ -53,8 +52,7 @@ class Feedback(models.Model):
     subject = models.TextField(default=None, blank=True, null=True)
     message = models.TextField(default=None, blank=True, null=True)
 
-    def __str__(self):
-        return f'{self.email} - {self.subject}'
+
 
 class UserToken(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
@@ -68,5 +66,4 @@ class UserToken(models.Model):
     is_sms = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
-    def __str__(self):
-        return f'{self.user}'
+
