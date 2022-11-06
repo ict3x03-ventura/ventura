@@ -350,7 +350,7 @@ def forgot_password(request):
 	context = {'rp_form':rp_form}
 	return render(request, 'forgot_password.html', context)
 
-@login_required
+@login_required(login_url='weblogin')
 def update_password(request):
     up_form = UpdatePasswordForm(user=request.user)
     if request.method == "POST":
