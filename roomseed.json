@@ -4,10 +4,11 @@
     "pk": 1,
     "fields": {
       "room_type": "Deluxe Twin",
-      "room_price": 69.42,
+      "room_price": 168.00,
       "room_status": true,
       "room_quantity": 7,
-      "room_description": "Our Deluxe Twin/Large Double also provides views over landscaped gardens. It has a seating area, digital safe and mini fridge. This room can be configured with either 2 single beds or zip and linked to provide a large double bed."
+      "room_description": "Our Deluxe Twin/Large Double also provides views over landscaped gardens. It has a seating area, digital safe and mini fridge. This room can be configured with either 2 single beds or zip and linked to provide a large double bed.",
+      "stripe_link": "https://book.stripe.com/test_aEUg1d56bfN66UEdQQ"
     }
   },
   {
@@ -23,7 +24,7 @@
     "pk": 2,
     "fields": {
       "room_type": "King Sleigh",
-      "room_price": 77.8,
+      "room_price": 168.00,
       "room_status": true,
       "room_quantity": 7,
       "room_description": "Our king size sleigh bedded also provides views over landscaped gardens. It has ample storage, a seating area, digital safe and mini fridge."
@@ -42,7 +43,7 @@
     "pk": 3,
     "fields": {
       "room_type": "Deluxe King",
-      "room_price": 92.8,
+      "room_price": 192.80,
       "room_status": true,
       "room_quantity": 7,
       "room_description": "Our Deluxe king size room has a seating area, ample storage, digital safe and mini fridge. This room can also be configured with an extra roll-away bed for families of 3."
@@ -61,7 +62,7 @@
     "pk": 4,
     "fields": {
       "room_type": "Compact Double",
-      "room_price": 56.2,
+      "room_price": 256.20,
       "room_status": true,
       "room_quantity": 7,
       "room_description": "As our smallest budget rooms, the Compact bedrooms are suited for single occupancy or short-stay double occupancy as they have limited space and storage."
@@ -80,7 +81,7 @@
     "pk": 5,
     "fields": {
       "room_type": "Standard",
-      "room_price": 49.9,
+      "room_price": 149.90,
       "room_status": true,
       "room_quantity": 7,
       "room_description": "The Standard Room comprises of 1 Double Bed or 2 Twin Beds, 2 Bedside Tables, a Desk & Chair. The room is furnished with wall to wall carpeting, trendy furnishings and a balcony. Our ultramodern glass bathroom is equipped with hairdryer, magnifying shaving and make up mirror as well as all the amenities you could possible need during your stay. A Complimentary Bottle of Wine, Fresh Fruit and Mineral Water, are provided on arrival. Electric current: 220 Volts. Smoking rooms & inter-connecting rooms are also available."
@@ -99,7 +100,7 @@
     "pk": 6,
     "fields": {
       "room_type": "Hollywood Twin",
-      "room_price": 1024.2,
+      "room_price": 424.20,
       "room_status": true,
       "room_quantity": 7,
       "room_description": "Our Deluxe Twin/Large Double also provides views over landscaped gardens. It has a seating area, digital safe and mini fridge. This room can be configured with either 2 single beds or zip and linked to provide a large double bed."
