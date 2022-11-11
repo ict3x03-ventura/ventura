@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('OWASP DependencyCheck'){
             steps {
-                dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'OWASP'
+                dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'Default'
             }
             post {
                 success { 
